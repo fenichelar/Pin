@@ -1,0 +1,87 @@
+/*
+  mega.h - Pin mappings for Arduino Mega.
+  Author: Alec Fenichel
+*/
+
+
+#ifndef Mega_H
+#define Mega_H
+
+#define ANALOGOFFSET 54
+
+struct pinMapping pinMappings[] = {
+// Digital
+{&PINE,&PORTE,&DDRE,1<<0},
+{&PINE,&PORTE,&DDRE,1<<1},
+{&PINE,&PORTE,&DDRE,1<<4},
+{&PINE,&PORTE,&DDRE,1<<5},
+{&PING,&PORTG,&DDRG,1<<5},
+{&PINE,&PORTE,&DDRE,1<<3},
+{&PINH,&PORTH,&DDRH,1<<3},
+{&PINH,&PORTH,&DDRH,1<<4},
+{&PINH,&PORTH,&DDRH,1<<5},
+{&PINH,&PORTH,&DDRH,1<<6},
+{&PINB,&PORTB,&DDRB,1<<4},
+{&PINB,&PORTB,&DDRB,1<<5},
+{&PINB,&PORTB,&DDRB,1<<6},
+{&PINB,&PORTB,&DDRB,1<<7},
+{&PINJ,&PORTJ,&DDRJ,1<<1},
+{&PINJ,&PORTJ,&DDRJ,1<<0},
+{&PINH,&PORTH,&DDRH,1<<1},
+{&PINH,&PORTH,&DDRH,1<<0},
+{&PIND,&PORTD,&DDRD,1<<3},
+{&PIND,&PORTD,&DDRD,1<<2},
+{&PIND,&PORTD,&DDRD,1<<1},
+{&PIND,&PORTD,&DDRD,1<<0},
+{&PINA,&PORTA,&DDRA,1<<0},
+{&PINA,&PORTA,&DDRA,1<<1},
+{&PINA,&PORTA,&DDRA,1<<2},
+{&PINA,&PORTA,&DDRA,1<<3},
+{&PINA,&PORTA,&DDRA,1<<4},
+{&PINA,&PORTA,&DDRA,1<<5},
+{&PINA,&PORTA,&DDRA,1<<6},
+{&PINA,&PORTA,&DDRA,1<<7},
+{&PINC,&PORTC,&DDRC,1<<7},
+{&PINC,&PORTC,&DDRC,1<<6},
+{&PINC,&PORTC,&DDRC,1<<5},
+{&PINC,&PORTC,&DDRC,1<<4},
+{&PINC,&PORTC,&DDRC,1<<3},
+{&PINC,&PORTC,&DDRC,1<<2},
+{&PINC,&PORTC,&DDRC,1<<1},
+{&PINC,&PORTC,&DDRC,1<<0},
+{&PIND,&PORTD,&DDRD,1<<7},
+{&PING,&PORTG,&DDRG,1<<2},
+{&PING,&PORTG,&DDRG,1<<1},
+{&PING,&PORTG,&DDRG,1<<0},
+{&PINL,&PORTL,&DDRL,1<<7},
+{&PINL,&PORTL,&DDRL,1<<6},
+{&PINL,&PORTL,&DDRL,1<<5},
+{&PINL,&PORTL,&DDRL,1<<4},
+{&PINL,&PORTL,&DDRL,1<<3},
+{&PINL,&PORTL,&DDRL,1<<2},
+{&PINL,&PORTL,&DDRL,1<<1},
+{&PINL,&PORTL,&DDRL,1<<0},
+{&PINB,&PORTB,&DDRB,1<<3},
+{&PINB,&PORTB,&DDRB,1<<2},
+{&PINB,&PORTB,&DDRB,1<<1},
+{&PINB,&PORTB,&DDRB,1<<0},
+// Analog
+{&PINF,&PORTF,&DDRF,1<<0},
+{&PINF,&PORTF,&DDRF,1<<1},
+{&PINF,&PORTF,&DDRF,1<<2},
+{&PINF,&PORTF,&DDRF,1<<3},
+{&PINF,&PORTF,&DDRF,1<<4},
+{&PINF,&PORTF,&DDRF,1<<5},
+{&PINF,&PORTF,&DDRF,1<<6},
+{&PINF,&PORTF,&DDRF,1<<7},
+{&PINK,&PORTK,&DDRK,1<<0},
+{&PINK,&PORTK,&DDRK,1<<1},
+{&PINK,&PORTK,&DDRK,1<<2},
+{&PINK,&PORTK,&DDRK,1<<3},
+{&PINK,&PORTK,&DDRK,1<<4},
+{&PINK,&PORTK,&DDRK,1<<5},
+{&PINK,&PORTK,&DDRK,1<<6},
+{&PINK,&PORTK,&DDRK,1<<7}
+};
+
+#endif
