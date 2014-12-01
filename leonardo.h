@@ -31,7 +31,7 @@ struct pinMapping pinMappings[] = {
 {REGF,1<<5},
 {REGF,1<<4},
 {REGF,1<<1},
-{REGF,1<<0},
+{REGF,1<<0}
 };
 
 #endif
