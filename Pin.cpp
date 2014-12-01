@@ -8,6 +8,7 @@
 
 #include "Pin.h"
 
+
 // ################################# Defines #################################
 
 #define DDR_HIGH (*_DDR |= _offset)
@@ -19,6 +20,19 @@
 #define DDR_ON (*_DDR & _offset)
 #define PORT_ON (*_PORT & _offset)
 #define PIN_ON (*_PIN & _offset)
+
+#define REGA &PINA,&PORTA,&DDRA
+#define REGB &PINB,&PORTB,&DDRB
+#define REGC &PINC,&PORTC,&DDRC
+#define REGD &PIND,&PORTD,&DDRD
+#define REGE &PINE,&PORTE,&DDRE
+#define REGF &PINF,&PORTF,&DDRF
+#define REGG &PING,&PORTG,&DDRG
+#define REGH &PINH,&PORTH,&DDRH
+#define REGI &PINI,&PORTI,&DDRI
+#define REGJ &PINJ,&PORTJ,&DDRJ
+#define REGK &PINK,&PORTK,&DDRK
+#define REGL &PINL,&PORTL,&DDRL
 
 
 // ################################# Declarations/Initializations #################################

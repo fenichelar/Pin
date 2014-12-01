@@ -11,27 +11,27 @@
 
 struct pinMapping pinMappings[] = {
 // Digital
-{&PIND,&PORTD,&DDRD,1<<0},
-{&PIND,&PORTD,&DDRD,1<<1},
-{&PIND,&PORTD,&DDRD,1<<2},
-{&PIND,&PORTD,&DDRD,1<<3},
-{&PIND,&PORTD,&DDRD,1<<4},
-{&PIND,&PORTD,&DDRD,1<<5},
-{&PIND,&PORTD,&DDRD,1<<6},
-{&PIND,&PORTD,&DDRD,1<<7},
-{&PINB,&PORTB,&DDRB,1<<0},
-{&PINB,&PORTB,&DDRB,1<<1},
-{&PINB,&PORTB,&DDRB,1<<2},
-{&PINB,&PORTB,&DDRB,1<<3},
-{&PINB,&PORTB,&DDRB,1<<4},
-{&PINB,&PORTB,&DDRB,1<<5},
+{REGD,1<<0},
+{REGD,1<<1},
+{REGD,1<<2},
+{REGD,1<<3},
+{REGD,1<<4},
+{REGD,1<<5},
+{REGD,1<<6},
+{REGD,1<<7},
+{REGB,1<<0},
+{REGB,1<<1},
+{REGB,1<<2},
+{REGB,1<<3},
+{REGB,1<<4},
+{REGB,1<<5},
 // Analog
-{&PINC,&PORTC,&DDRC,1<<0},
-{&PINC,&PORTC,&DDRC,1<<1},
-{&PINC,&PORTC,&DDRC,1<<2},
-{&PINC,&PORTC,&DDRC,1<<3},
-{&PINC,&PORTC,&DDRC,1<<4},
-{&PINC,&PORTC,&DDRC,1<<5}
+{REGC,1<<0},
+{REGC,1<<1},
+{REGC,1<<2},
+{REGC,1<<3},
+{REGC,1<<4},
+{REGC,1<<5}
 };
 
 #endif
