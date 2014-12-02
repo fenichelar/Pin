@@ -1,14 +1,18 @@
-/*
-  mega.h - Pin mappings for Arduino Mega.
-  Author: Alec Fenichel
+/**
+	@file mega.h
+	@author Alec Fenichel
+	@brief Arduino Mega pin mappings
 */
 
 
 #ifndef Mega_H
 #define Mega_H
 
-#define ANALOGOFFSET 54
+#define ANALOGOFFSET 54   ///< Index analog pins begin with in array
 
+/**
+	Pin mappings for the Arduino board
+ */
 struct pinMapping pinMappings[] = {
 // Digital
 {REGE,1<<0},

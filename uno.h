@@ -1,14 +1,18 @@
-/*
-  uno.h - Pin mappings for Arduino Uno.
-  Author: Alec Fenichel
+/**
+	@file uno.h
+	@author Alec Fenichel
+	@brief Arduino Uno pin mappings
 */
 
 
 #ifndef Uno_H
 #define Uno_H
 
-#define ANALOGOFFSET 14
+#define ANALOGOFFSET 14   ///< Index analog pins begin with in array
 
+/**
+	Pin mappings for the Arduino board
+ */
 struct pinMapping pinMappings[] = {
 // Digital
 {REGD,1<<0},
