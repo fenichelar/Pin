@@ -308,7 +308,7 @@ void Pin::toggleMode() {
 }
 
 /**
-	Toggle the pin mode (HIGH -> LOW, LOW -> HIGH)
+	Toggle the pin state (HIGH -> LOW, LOW -> HIGH)
  */
 void Pin::toggleState() {
 	if PORT_ON {
