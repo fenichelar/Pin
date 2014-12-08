@@ -22,17 +22,17 @@ struct pinMapping {
 
 // Arduino Mega
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
-	#include "mega.h"  ///< Include the pin mappings for the Arduino Mega
+	#include "boards/mega.h"  ///< Include the pin mappings for the Arduino Mega
 #endif
 
 // Arduino Uno
 #if defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__)
-	#include "uno.h"  ///< Include the pin mappings for the Arduino Uno
+	#include "boards/uno.h"  ///< Include the pin mappings for the Arduino Uno
 #endif
 
 // Arduino Leonardo
 #if defined(__AVR_ATmega32U4__) || defined(__AVR_ATmega16U4__)
-	#include "leonardo.h"  ///< Include the pin mappings for the Arduino Leonardo
+	#include "boards/leonardo.h"  ///< Include the pin mappings for the Arduino Leonardo
 #endif
 
 
