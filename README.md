@@ -1,3 +1,3 @@
 Pin
 ===
-A Arduino library for fast I/O using port manipulation.
+An Arduino library for fast I/O using port manipulation.
