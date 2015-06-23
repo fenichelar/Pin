@@ -1,6 +1,6 @@
 Pin
 ===
-An easy to use Arduino library for fast I/O using port manipulation. Supports Arduino Mega, Arduino Uno, and Arduino Leonardo. Complete documentation can be found [here](https://fenichelar.github.io/Pin/index.html). Common uses are listed below.
+An easy to use Arduino library for fast digital I/O using port manipulation. Supports Arduino Mega, Arduino Uno, and Arduino Leonardo. Complete documentation can be found [here](https://fenichelar.github.io/Pin). Common uses are listed below.
 
 ## Import Pin Library
 ```C
