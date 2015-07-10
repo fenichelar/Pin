@@ -2,13 +2,13 @@
 	@file leonardo.h
 	@author Alec Fenichel
 	@brief Arduino Leonardo pin mappings
-*/
+ */
 
 
 #ifndef Leonardo_H
 #define Leonardo_H
 
-#define ANALOGOFFSET 14   ///< Index analog pins begin with in array
+#define ANALOGOFFSET 14  ///< Index analog pins begin with in array
 
 /**
 	Pin mappings for the Arduino board

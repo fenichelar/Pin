@@ -3,7 +3,7 @@
 	@author Alec Fenichel
 	@brief Arduino Pin library
 	@details Arduino library for fast access to Arduino I/O pins using port manipulation
-*/
+ */
 
 
 #include "Arduino.h"
@@ -38,7 +38,7 @@
 
 /**
 	Class for fast access to Arduino I/O pins using port manipulation
-	
+
 	@author Alec Fenichel
  */
 class Pin {
@@ -46,7 +46,7 @@ class Pin {
 		// #################### Constructors ####################
 		Pin(uint8_t number);
 		Pin(uint8_t number, bool analog);
-		
+
 		// #################### Getters ####################
 		uint8_t getNumber();
 		uint8_t getOffset();
@@ -56,7 +56,7 @@ class Pin {
 		uint8_t getMode();
 		uint8_t getState();
 		uint8_t getValue();
-		
+
 		// #################### Setters ####################
 		// Generic
 		bool set(uint8_t mode, uint8_t state);

@@ -2,13 +2,13 @@
 	@file mega.h
 	@author Alec Fenichel
 	@brief Arduino Mega pin mappings
-*/
+ */
 
 
 #ifndef Mega_H
 #define Mega_H
 
-#define ANALOGOFFSET 54   ///< Index analog pins begin with in array
+#define ANALOGOFFSET 54  ///< Index analog pins begin with in array
 
 /**
 	Pin mappings for the Arduino board

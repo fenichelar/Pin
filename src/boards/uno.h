@@ -2,13 +2,13 @@
 	@file uno.h
 	@author Alec Fenichel
 	@brief Arduino Uno pin mappings
-*/
+ */
 
 
 #ifndef Uno_H
 #define Uno_H
 
-#define ANALOGOFFSET 14   ///< Index analog pins begin with in array
+#define ANALOGOFFSET 14  ///< Index analog pins begin with in array
 
 /**
 	Pin mappings for the Arduino board
