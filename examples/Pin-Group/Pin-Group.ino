@@ -18,7 +18,7 @@ Pin myPinGroup[] = {0,1,2};  // Create array of Pin objects for digital pins lab
 void setup() {
   Serial.begin(9600);
   
-  // Check to ensure all pins in array use the same registers.
+  // Check to ensure all pins in array use the same registers
   if (checkPinGroup(myPinGroup)) {
     Serial.println("All Pins in array use the same registers.");
   } else {
