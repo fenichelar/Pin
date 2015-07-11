@@ -21,11 +21,11 @@ Pin myPins[] = {6,7};
 ```
 
 ## Use as Input
-Set Mode to Input
+Set mode to input
 ```C
 myPin.setInput();
 ```
-Enable/Disable Pullup Resistor
+Enable/disable pullup resistor
 ```C
 myPin.setPullupOn();
 ```
@@ -34,7 +34,7 @@ myPin.setPullupOff();
 ```
 
 ## Use as Output
-Set Mode to Output
+Set mode to output
 ```C
 myPin.setOutput();
 ```
@@ -47,25 +47,47 @@ myPin.setLow();
 ```
 
 ## Get Pin Info
-Get Mode (INPUT/OUTPUT)
+Get mode (INPUT/OUTPUT)
 ```C
 myPin.getMode();
 ```
-Get State (HIGH/LOW)
+Get state (HIGH/LOW)
 ```C
 myPin.getState();
 ```
-Get Value (HIGH/LOW)
+Get value (HIGH/LOW)
 ```C
 myPin.getValue();
 ```
 
 ## Toggle
-Toggle Mode (OUTPUT -> INPUT, INPUT -> OUTPUT)
+Toggle mode (OUTPUT -> INPUT, INPUT -> OUTPUT)
 ```C
 myPin.toggleMode();
 ```
-Toggle State (HIGH -> LOW, LOW -> HIGH)
+Toggle state (HIGH -> LOW, LOW -> HIGH)
 ```C
 myPin.toggleState();
 ```
+
+## Simultaneous Operations on Multiple Pins
+
+For advanced users only! All Pins in array must use the same DDR and PORT registers. Look at the coresponding file in the boards directory to determine what register each pin uses.
+
+Import Pin Library with support for simultaneous operations
+```C
+#include <PinGroup.h>
+```
+Create array of Pins for simultaneous operations
+```C
+Pin myPinsGroup[] = {0,1,2};
+```
+Simultaneously set mode for array of Pins to input
+```C
+setInput(myPinsGroup);
+```
+Simultaneously set mode for array of Pins to output
+```C
+setOutput(myPinsGroup);
+```
+
