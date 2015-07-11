@@ -154,4 +154,23 @@ void setOutputLow(Pin (&pins)[N]) {
 	PORTS_LOW;
 }
 
+/**
+	Check the array to ensure all pins use the same registers
+
+	@param pins an array of pins
+
+	@return true if the pins in the array all use the same registers, false otherwise
+ */
+template<size_t N>
+bool checkPinGroup(Pin (&pins)[N]) {
+	volatile uint8_t* ddr = pins[0].getDDR();
+	for (int i = 0; i < N; i++) {
+		if (pins[0].getDDR() != pins[i].getDDR()) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
 #endif

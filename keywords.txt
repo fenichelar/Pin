@@ -27,3 +27,5 @@ setOutputLow	KEYWORD2
 
 toggleMode	KEYWORD2
 toggleState	KEYWORD2
+
+checkPinGroup	KEYWORD2

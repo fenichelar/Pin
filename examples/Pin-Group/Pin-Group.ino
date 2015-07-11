@@ -10,23 +10,32 @@
 
 // The Pins used in this array must all be on the same DDR and PORT registers
 // Look at the coresponding file in the boards directory to determine what register each pin is on
-Pin myPinsGroup[] = {0,1,2};  // Create array of Pin objects for digital pins labelled 0-2 on any of the supported boards
+Pin myPinGroup[] = {0,1,2};  // Create array of Pin objects for digital pins labelled 0-2 on any of the supported boards
 
 /**
   Called at start
  */
 void setup() {
+  Serial.begin(9600);
+  
+  // Check to ensure all pins in array use the same registers.
+  if (checkPinGroup(myPinGroup)) {
+    Serial.println("All Pins in array use the same registers.");
+  } else {
+    Serial.println("Pins in array do not use the same registers!");
+    while(1) {}
+  }
 }
 
 /**
   Called continously after setup
  */
 void loop() {
-  setOutputLow(myPinsGroup);  // Simultaneously set array of Pins to output low
+  setOutputLow(myPinGroup);  // Simultaneously set array of Pins to output low
   
   delay(2);  // Wait 2 milliseconds
   
-  setInput(myPinsGroup);  // Simultaneously set array of Pins to input mode
+  setInput(myPinGroup);  // Simultaneously set array of Pins to input mode
   
   delay(2);  // Wait 2 milliseconds
 

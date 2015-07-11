@@ -76,18 +76,19 @@ For advanced users only! All Pins in array must use the same DDR and PORT regist
 
 Import Pin Library with support for simultaneous operations
 ```C
+#include <Pin.h>
 #include <PinGroup.h>
 ```
 Create array of Pins for simultaneous operations
 ```C
-Pin myPinsGroup[] = {0,1,2};
+Pin myPinGroup[] = {0,1,2};
 ```
 Simultaneously set mode for array of Pins to input
 ```C
-setInput(myPinsGroup);
+setInput(myPinGroup);
 ```
 Simultaneously set mode for array of Pins to output
 ```C
-setOutput(myPinsGroup);
+setOutput(myPinGroup);
 ```
 
