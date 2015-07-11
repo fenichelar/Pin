@@ -1,6 +1,6 @@
 Arduino Pin Library
 ===
-An easy to use Arduino library for fast digital I/O using port manipulation. Supports Arduino Mega, Arduino Uno, and Arduino Leonardo. Complete documentation can be found [here](https://fenichelar.github.io/Pin). Common uses are listed below.
+An easy to use Arduino library for fast digital I/O using port manipulation. Capable of simultaneous operations on multiple Pins. Supports Arduino Mega, Arduino Uno, and Arduino Leonardo. Complete documentation can be found [here](https://fenichelar.github.io/Pin). Common uses are listed below.
 
 ## Install
 Install from the Arduino Library Manager or download the latest release [here](https://github.com/fenichelar/Pin/releases/latest).
