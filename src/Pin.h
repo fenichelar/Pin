@@ -8,8 +8,10 @@
 
 #include "Arduino.h"
 
+
 #ifndef Pin_H
 #define Pin_H
+
 
 // ################################# Defines #################################
 
@@ -35,6 +37,7 @@
 #define REGJ &PINJ,&PORTJ,&DDRJ  ///< The PIN, PORT, and DDR addresses of the J registers
 #define REGK &PINK,&PORTK,&DDRK  ///< The PIN, PORT, and DDR addresses of the K registers
 #define REGL &PINL,&PORTL,&DDRL  ///< The PIN, PORT, and DDR addresses of the L registers
+
 
 /**
 	Class for fast access to Arduino I/O pins using port manipulation
@@ -77,6 +80,7 @@ class Pin {
 		// Toggle
 		void toggleMode();
 		void toggleState();
+
 	private:
 		// Constructor
 		void init(uint8_t number);
