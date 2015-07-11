@@ -10,7 +10,7 @@
 
 // The Pins used in this array must all be on the same DDR and PORT registers
 // Look at the coresponding file in the boards directory to determine what register each pin is on
-Pin myPins[] = {0,1,2};  // Create array of Pin objects for digital pins labelled 0-2 on any of the supported boards
+Pin myPinsGroup[] = {0,1,2};  // Create array of Pin objects for digital pins labelled 0-2 on any of the supported boards
 
 /**
   Called at start
@@ -22,11 +22,11 @@ void setup() {
   Called continously after setup
  */
 void loop() {
-  setOutputLow(myPins);  // Simultaneously set array of Pins to output low
+  setOutputLow(myPinsGroup);  // Simultaneously set array of Pins to output low
   
   delay(2);  // Wait 2 milliseconds
   
-  setInput(myPins);  // Simultaneously set array of Pins to input mode
+  setInput(myPinsGroup);  // Simultaneously set array of Pins to input mode
   
   delay(2);  // Wait 2 milliseconds
 
