@@ -91,3 +91,11 @@ Simultaneously set mode for array of Pins to output
 ```C
 setOutput(myPinGroup);
 ```
+Simultaneously check if array of Pins are all HIGH
+```C
+getValue(myPinGroup) == HIGH
+```
+Simultaneously check if array of Pins are all LOW
+```C
+getValue(myPinGroup) == LOW
+```
