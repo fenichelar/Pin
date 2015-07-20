@@ -21,7 +21,8 @@
 #define PORTS_HIGH (*pins[0].getPORT() |= offset)  ///< Set the PORT register to HIGH for an array of pins
 #define PORTS_LOW (*pins[0].getPORT() &= ~offset)  ///< Set the PORT register to LOW for an array of pins
 
-#define PINS_ON (*pins[0].getPIN() & offset)  ///< Get the PIN register for an array of pins (HIGH, LOW)
+#define PINS_ON (*pins[0].getPIN() & offset)  ///< Get the PIN register for an array of pins
+#define PINS_OFF (*pins[0].getPIN() | ~offset)  ///< Get the inverse PIN register for an array of pins
 
 #define MERGE_OFFSET(PINS,LEN) { \
 	offset = (PINS)[0].getOffset(); \
@@ -166,7 +167,7 @@ void setOutputLow(Pin (&pins)[N]) {
 
 	@param pins an array of pins that use the same registers
 
-	@return HIGH if all of the pins in the array have a value of HIGH, LOW otherwise
+	@return HIGH if all of the pins in the array have a value of HIGH, LOW if all of the pins in the array have a value of LOW, -1 otherwise
  */
 template<size_t N>
 uint8_t getValue(Pin (&pins)[N]) {
@@ -174,8 +175,10 @@ uint8_t getValue(Pin (&pins)[N]) {
 	MERGE_OFFSET(pins,N);
 	if (PINS_ON == offset) {
 		return HIGH;
-	} else {
+	} else if (PINS_OFF == ~offset) {
 		return LOW;
+	} else {
+		return -1;
 	}
 }
 

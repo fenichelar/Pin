@@ -41,9 +41,11 @@ void loop() {
 
   // Simultaneously read an array of Pins value
   if (getValue(myPinGroup) == HIGH) {
-    Serial.println("All Pins are HIGH.");
+    Serial.println("All Pins in array are HIGH.");
+  } else if (getValue(myPinGroup) == LOW) {
+    Serial.println("All Pins in array are LOW.");
   } else {
-    Serial.println("Not all Pins are HIGH.");
+    Serial.println("Pins in array are not the same value.");
   }
 
   delay(200);  // Wait 200 milliseconds
