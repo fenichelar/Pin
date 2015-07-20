@@ -22,5 +22,5 @@ void setup() {
  */
 void loop() {
   myPin.toggleState();  // Set Pin to output the opposite of the previous output
-  delay(2);  // Wait 2 milliseconds
+  delay(200);  // Wait 200 milliseconds
 }

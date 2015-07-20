@@ -81,7 +81,7 @@ Import Pin Library with support for simultaneous operations
 ```
 Create array of Pins for simultaneous operations
 ```C
-Pin myPinGroup[] = {0,1,2};
+Pin myPinGroup[] = {2,3,5};
 ```
 Simultaneously set mode for array of Pins to input
 ```C
@@ -91,4 +91,3 @@ Simultaneously set mode for array of Pins to output
 ```C
 setOutput(myPinGroup);
 ```
-

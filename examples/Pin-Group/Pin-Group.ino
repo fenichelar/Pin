@@ -10,20 +10,20 @@
 
 // The Pins used in this array must all be on the same DDR and PORT registers
 // Look at the coresponding file in the boards directory to determine what register each pin is on
-Pin myPinGroup[] = {0,1,2};  // Create array of Pin objects for digital pins labelled 0-2 on any of the supported boards
+Pin myPinGroup[] = {2,3,5};  // Create array of Pin objects for digital pins labelled 2,3,5 on the Arduino Uno or Mega (not valid for Leonardo)
 
 /**
   Called at start
  */
 void setup() {
   Serial.begin(9600);
-  
+
   // Check to ensure all pins in array use the same registers
   if (checkPinGroup(myPinGroup)) {
     Serial.println("All Pins in array use the same registers.");
   } else {
     Serial.println("Pins in array do not use the same registers!");
-    while(1) {}
+    while(1) {}  // Infinite loop
   }
 }
 
@@ -32,11 +32,20 @@ void setup() {
  */
 void loop() {
   setOutputLow(myPinGroup);  // Simultaneously set array of Pins to output low
-  
-  delay(2);  // Wait 2 milliseconds
-  
+
+  delay(200);  // Wait 200 milliseconds
+
   setInput(myPinGroup);  // Simultaneously set array of Pins to input mode
-  
-  delay(2);  // Wait 2 milliseconds
+
+  delay(200);  // Wait 200 milliseconds
+
+  // Simultaneously read an array of Pins value
+  if (getValue(myPinGroup) == HIGH) {
+    Serial.println("All Pins are HIGH.");
+  } else {
+    Serial.println("Not all Pins are HIGH.");
+  }
+
+  delay(200);  // Wait 200 milliseconds
 
 }

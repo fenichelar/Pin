@@ -21,7 +21,14 @@
 #define PORTS_HIGH (*pins[0].getPORT() |= offset)  ///< Set the PORT register to HIGH for an array of pins
 #define PORTS_LOW (*pins[0].getPORT() &= ~offset)  ///< Set the PORT register to LOW for an array of pins
 
-#define MERGE_OFFSET(PINS,LEN) { for (int i = 0; i < (LEN); i++) { offset |= (PINS)[i].getOffset();} }  ///< Merge the offsets of multiple pins in an array
+#define PINS_ON (*pins[0].getPIN() & offset)  ///< Get the PIN register for an array of pins (HIGH, LOW)
+
+#define MERGE_OFFSET(PINS,LEN) { \
+	offset = (PINS)[0].getOffset(); \
+	for (int i = 1; i < (LEN); i++) { \
+		offset |= (PINS)[i].getOffset(); \
+	} \
+}  ///< Merge the offsets of multiple pins in an array
 
 
 // ################################# Non-member Methods #################################
@@ -35,8 +42,8 @@
  */
 template<size_t N>
 void setInput(Pin (&pins)[N]) {
-	uint8_t offset = 0;
-	MERGE_OFFSET(pins,N)
+	uint8_t offset;
+	MERGE_OFFSET(pins,N);
 	DDRS_LOW;
 }
 
@@ -47,8 +54,8 @@ void setInput(Pin (&pins)[N]) {
  */
 template<size_t N>
 void setPullupOn(Pin (&pins)[N]) {
-	uint8_t offset = 0;
-	MERGE_OFFSET(pins,N)
+	uint8_t offset;
+	MERGE_OFFSET(pins,N);
 	PORTS_HIGH;
 }
 
@@ -59,8 +66,8 @@ void setPullupOn(Pin (&pins)[N]) {
  */
 template<size_t N>
 void setPullupOff(Pin (&pins)[N]) {
-	uint8_t offset = 0;
-	MERGE_OFFSET(pins,N)
+	uint8_t offset;
+	MERGE_OFFSET(pins,N);
 	PORTS_LOW;
 }
 
@@ -71,8 +78,8 @@ void setPullupOff(Pin (&pins)[N]) {
  */
 template<size_t N>
 void setInputPullupOn(Pin (&pins)[N]) {
-	uint8_t offset = 0;
-	MERGE_OFFSET(pins,N)
+	uint8_t offset;
+	MERGE_OFFSET(pins,N);
 	DDRS_LOW;
 	PORTS_HIGH;
 }
@@ -84,8 +91,8 @@ void setInputPullupOn(Pin (&pins)[N]) {
  */
 template<size_t N>
 void setInputPullupOff(Pin (&pins)[N]) {
-	uint8_t offset = 0;
-	MERGE_OFFSET(pins,N)
+	uint8_t offset;
+	MERGE_OFFSET(pins,N);
 	DDRS_LOW;
 	PORTS_LOW;
 }
@@ -99,9 +106,9 @@ void setInputPullupOff(Pin (&pins)[N]) {
  */
 template<size_t N>
  void setOutput(Pin (&pins)[N]) {
- 	uint8_t offset = 0;
- 	MERGE_OFFSET(pins,N)
- 	DDRS_HIGH;
+	uint8_t offset;
+	MERGE_OFFSET(pins,N);
+	DDRS_HIGH;
  }
 
 /**
@@ -111,8 +118,8 @@ template<size_t N>
  */
 template<size_t N>
 void setHigh(Pin (&pins)[N]) {
-	uint8_t offset = 0;
-	MERGE_OFFSET(pins,N)
+	uint8_t offset;
+	MERGE_OFFSET(pins,N);
 	PORTS_HIGH;
 }
 
@@ -123,8 +130,8 @@ void setHigh(Pin (&pins)[N]) {
  */
 template<size_t N>
 void setLow(Pin (&pins)[N]) {
-	uint8_t offset = 0;
-	MERGE_OFFSET(pins,N)
+	uint8_t offset;
+	MERGE_OFFSET(pins,N);
 	PORTS_LOW;
 }
 
@@ -135,8 +142,8 @@ void setLow(Pin (&pins)[N]) {
  */
 template<size_t N>
 void setOutputHigh(Pin (&pins)[N]) {
-	uint8_t offset = 0;
-	MERGE_OFFSET(pins,N)
+	uint8_t offset;
+	MERGE_OFFSET(pins,N);
 	DDRS_HIGH;
 	PORTS_HIGH;
 }
@@ -148,10 +155,28 @@ void setOutputHigh(Pin (&pins)[N]) {
  */
 template<size_t N>
 void setOutputLow(Pin (&pins)[N]) {
-	uint8_t offset = 0;
-	MERGE_OFFSET(pins,N)
+	uint8_t offset;
+	MERGE_OFFSET(pins,N);
 	DDRS_HIGH;
 	PORTS_LOW;
+}
+
+/**
+	Get the value of multiple pins from the PIN register
+
+	@param pins an array of pins that use the same registers
+
+	@return HIGH if all of the pins in the array have a value of HIGH, LOW otherwise
+ */
+template<size_t N>
+uint8_t getValue(Pin (&pins)[N]) {
+	uint8_t offset;
+	MERGE_OFFSET(pins,N);
+	if (PINS_ON == offset) {
+		return HIGH;
+	} else {
+		return LOW;
+	}
 }
 
 /**
