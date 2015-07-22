@@ -32,7 +32,7 @@
 }  ///< Merge the offsets of multiple pins in an array
 
 
-// ################################# Non-member Methods #################################
+// ################################# Setters #################################
 
 // #################### Input ####################
 
@@ -162,6 +162,9 @@ void setOutputLow(Pin (&pins)[N]) {
 	PORTS_LOW;
 }
 
+
+// ################################# Getters #################################
+
 /**
 	Get the value of multiple pins from the PIN register
 
@@ -181,6 +184,9 @@ uint8_t getValue(Pin (&pins)[N]) {
 		return -1;
 	}
 }
+
+
+// ################################# Checkers #################################
 
 /**
 	Check the array to ensure all pins use the same registers
