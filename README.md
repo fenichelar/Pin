@@ -72,7 +72,7 @@ myPin.toggleState();
 
 ## Simultaneous Operations on Multiple Pins
 
-For advanced users only! All Pins in array must use the same DDR and PORT registers. Look at the coresponding file in the boards directory to determine what register each pin uses.
+For advanced users only! All Pins in array must use the same DDR and PORT registers. Look at the corresponding file in the boards directory to determine what register each pin uses.
 
 Import Pin Library with support for simultaneous operations
 ```C
