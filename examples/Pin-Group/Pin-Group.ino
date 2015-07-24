@@ -19,7 +19,7 @@ void setup() {
   Serial.begin(9600);
 
   // Check to ensure all pins in array use the same registers
-  if (checkPinGroup(myPinGroup)) {
+  if (checkPinGroup(myPinGroup) == true) {
     Serial.println("All Pins in array use the same registers.");
   } else {
     Serial.println("Pins in array do not use the same registers!");

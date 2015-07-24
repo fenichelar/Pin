@@ -21,6 +21,6 @@ void setup() {
   Called continously after setup
  */
 void loop() {
-  myPin.toggleState();  // Set Pin to output the opposite of the previous output
+  myPin.toggleState();  // Set Pin to output the opposite of the previous output (HIGH -> LOW, LOW -> HIGH)
   delay(200);  // Wait 200 milliseconds
 }
