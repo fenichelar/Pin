@@ -72,9 +72,9 @@ myPin.toggleState();
 
 ## Simultaneous Operations on Multiple Pins
 
-For advanced users only! All Pins in array must use the same DDR and PORT registers. Look at the corresponding file in the boards directory to determine what register each pin uses.
+All Pins in array must use the same DDR, PORT, and PIN registers. Look at the corresponding file in the boards directory to determine what registers each pin uses on a given board.
 
-Import Pin Library with support for simultaneous operations
+Import Pin library with support for simultaneous operations
 ```C
 #include <Pin.h>
 #include <PinGroup.h>
@@ -82,6 +82,10 @@ Import Pin Library with support for simultaneous operations
 Create array of Pins for simultaneous operations
 ```C
 Pin myPinGroup[] = {2,3,5};
+```
+Check to ensure all pins in array of pins use the same registers
+```C
+checkPinGroup(myPinGroup) == true
 ```
 Simultaneously set mode for array of Pins to input
 ```C
