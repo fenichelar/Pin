@@ -1,7 +1,7 @@
 /**
   @file Pin-Toggle.ino
   @author Alec Fenichel
-  @brief Pin toggling example
+  @brief Pin toggle example
   @details Quickly toggling a pin between high and low
 */
 

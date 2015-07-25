@@ -2,7 +2,7 @@
   @file Pin-Group.ino
   @author Alec Fenichel
   @brief Pin group example
-  @details For advanced users only: simultaneously switch an array of multiple Pins between outputs and inputs
+  @details Simultaneously switch an array of multiple Pins between outputs and inputs
 */
 
 #include <Pin.h>  // Include Pin library
