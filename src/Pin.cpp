@@ -8,6 +8,17 @@
 
 #include "Pin.h"
 
+/**
+	Struct for storing register addresses and offset
+ */
+struct pinMapping {
+	volatile uint8_t* pin;  ///< Address of the PIN register, used to read pin if the pin is set as an input
+	volatile uint8_t* port;  ///< Address of the PORT register, used to set output if the pin is set as an output or set pull-up resistor if the pin is set as an input
+	volatile uint8_t* ddr;  ///< Address of the DDR register, used to define data direction
+	const uint8_t offset;  ///< Bit mask for specific pin inside register
+	const uint8_t timer;  ///< Timer used for specific pin
+};
+
 
 // ################################# Constructors #################################
 
@@ -28,7 +39,11 @@ Pin::Pin(uint8_t number) {
  */
 Pin::Pin(uint8_t number, bool analog) {
 	if (analog) {
-		init(analogInputToDigitalPin(number));
+		#ifdef Board_H
+			init(number + ANALOGOFFSET);
+		#else
+			init(analogInputToDigitalPin(number));
+		#endif
 	} else {
 		init(number);
 	}
@@ -41,11 +56,19 @@ Pin::Pin(uint8_t number, bool analog) {
  */
 void Pin::init(uint8_t number) {
 	_number = number;
-	_offset = digitalPinToBitMask(_number);
-	_timer = digitalPinToTimer(_number);
-	_PIN = portInputRegister(digitalPinToPort(_number));
-	_PORT = portOutputRegister(digitalPinToPort(_number));
-	_DDR = portModeRegister(digitalPinToPort(_number));
+	#ifdef Board_H
+		_offset = pinMappings[_number].offset;
+		_timer = pinMappings[_number].timer;
+		_PIN = pinMappings[_number].pin;
+		_PORT = pinMappings[_number].port;
+		_DDR = pinMappings[_number].ddr;
+	#else
+		_offset = digitalPinToBitMask(_number);
+		_timer = digitalPinToTimer(_number);
+		_PIN = portInputRegister(digitalPinToPort(_number));
+		_PORT = portOutputRegister(digitalPinToPort(_number));
+		_DDR = portModeRegister(digitalPinToPort(_number));
+	#endif
 }
 
 
