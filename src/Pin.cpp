@@ -19,20 +19,21 @@ struct pinMapping {
 	const uint8_t offset;  ///< Bit mask for specific pin inside register
 };
 
+/// Include the pin mappings for...
 
-// Arduino Mega
-#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
-	#include "boards/mega.h"  ///< Include the pin mappings for the Arduino Mega
-#endif
-
-// Arduino Uno
-#if defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__)
-	#include "boards/uno.h"  ///< Include the pin mappings for the Arduino Uno
-#endif
-
-// Arduino Leonardo
-#if defined(__AVR_ATmega32U4__) || defined(__AVR_ATmega16U4__)
-	#include "boards/leonardo.h"  ///< Include the pin mappings for the Arduino Leonardo
+#if   defined(__AVR_ATmega1280__) \
+   ||	defined(__AVR_ATmega2560__)				// Arduino Mega
+#include "boards/mega.h"
+#elif defined(__AVR_ATmega328P__) \
+	 ||	defined(__AVR_ATmega168__)				// Arduino Uno
+#include "boards/uno.h"
+#elif defined(__AVR_ATmega32U4__) \
+	 || defined(__AVR_ATmega16U4__)				// Arduino Leonardo
+#include "boards/leonardo.h"
+#elif defined(__AVR_ATtiny25__) 	\
+   || defined(__AVR_ATtiny45__) 	\
+   ||	defined(__AVR_ATtiny85__)					// ATTiny25/45/85
+#include "boards/attinyX5.h"
 #endif
 
 
