@@ -36,7 +36,7 @@ struct pinMapping {
 #endif
 
 #ifndef PWMRANGE
-#define PWMRange 255
+#define PWMRANGE 255
 #endif
 
 // ################################# Constructors #################################
