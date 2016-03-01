@@ -25,19 +25,6 @@
 #define PORT_ON (*_PORT & _offset)  ///< Get the PORT register for the pin (HIGH, LOW)
 #define PIN_ON (*_PIN & _offset)  ///< Get the PIN register for the pin (HIGH, LOW)
 
-#define REGA &PINA,&PORTA,&DDRA  ///< The PIN, PORT, and DDR addresses of the A registers
-#define REGB &PINB,&PORTB,&DDRB  ///< The PIN, PORT, and DDR addresses of the B registers
-#define REGC &PINC,&PORTC,&DDRC  ///< The PIN, PORT, and DDR addresses of the C registers
-#define REGD &PIND,&PORTD,&DDRD  ///< The PIN, PORT, and DDR addresses of the D registers
-#define REGE &PINE,&PORTE,&DDRE  ///< The PIN, PORT, and DDR addresses of the E registers
-#define REGF &PINF,&PORTF,&DDRF  ///< The PIN, PORT, and DDR addresses of the F registers
-#define REGG &PING,&PORTG,&DDRG  ///< The PIN, PORT, and DDR addresses of the G registers
-#define REGH &PINH,&PORTH,&DDRH  ///< The PIN, PORT, and DDR addresses of the H registers
-#define REGI &PINI,&PORTI,&DDRI  ///< The PIN, PORT, and DDR addresses of the I registers
-#define REGJ &PINJ,&PORTJ,&DDRJ  ///< The PIN, PORT, and DDR addresses of the J registers
-#define REGK &PINK,&PORTK,&DDRK  ///< The PIN, PORT, and DDR addresses of the K registers
-#define REGL &PINL,&PORTL,&DDRL  ///< The PIN, PORT, and DDR addresses of the L registers
-
 
 /**
 	Class for fast access to Arduino I/O pins using port manipulation
@@ -53,6 +40,7 @@ class Pin {
 		// #################### Getters ####################
 		uint8_t getNumber();
 		uint8_t getOffset();
+		uint8_t getTimer();
 		volatile uint8_t* getPIN();
 		volatile uint8_t* getPORT();
 		volatile uint8_t* getDDR();
@@ -87,6 +75,7 @@ class Pin {
 		// Variables
 		uint8_t _number;
 		uint8_t _offset;
+		uint8_t _timer;
 		volatile uint8_t* _PIN;
 		volatile uint8_t* _PORT;
 		volatile uint8_t* _DDR;

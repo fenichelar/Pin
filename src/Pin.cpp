@@ -9,33 +9,6 @@
 #include "Pin.h"
 
 
-/**
-	Struct for storing register addresses and offset
- */
-struct pinMapping {
-	volatile uint8_t* pin;  ///< Address of the PIN register, used to read pin if the pin is set as an input
-	volatile uint8_t* port;  ///< Address of the PORT register, used to set output if the pin is set as an output or set pull-up resistor if the pin is set as an input
-	volatile uint8_t* ddr;  ///< Address of the DDR register, used to define data direction
-	const uint8_t offset;  ///< Bit mask for specific pin inside register
-};
-
-
-// Arduino Mega
-#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
-	#include "boards/mega.h"  ///< Include the pin mappings for the Arduino Mega
-#endif
-
-// Arduino Uno
-#if defined(__AVR_ATmega328P__) || defined(__AVR_ATmega168__)
-	#include "boards/uno.h"  ///< Include the pin mappings for the Arduino Uno
-#endif
-
-// Arduino Leonardo
-#if defined(__AVR_ATmega32U4__) || defined(__AVR_ATmega16U4__)
-	#include "boards/leonardo.h"  ///< Include the pin mappings for the Arduino Leonardo
-#endif
-
-
 // ################################# Constructors #################################
 
 /**
@@ -55,7 +28,7 @@ Pin::Pin(uint8_t number) {
  */
 Pin::Pin(uint8_t number, bool analog) {
 	if (analog) {
-		init(number + ANALOGOFFSET);
+		init(analogInputToDigitalPin(number));
 	} else {
 		init(number);
 	}
@@ -68,10 +41,11 @@ Pin::Pin(uint8_t number, bool analog) {
  */
 void Pin::init(uint8_t number) {
 	_number = number;
-	_offset = pinMappings[_number].offset;
-	_PIN = pinMappings[_number].pin;
-	_PORT = pinMappings[_number].port;
-	_DDR = pinMappings[_number].ddr;
+	_offset = digitalPinToBitMask(_number);
+	_timer = digitalPinToTimer(_number);
+	_PIN = portInputRegister(digitalPinToPort(_number));
+	_PORT = portOutputRegister(digitalPinToPort(_number));
+	_DDR = portModeRegister(digitalPinToPort(_number));
 }
 
 
@@ -93,6 +67,15 @@ uint8_t Pin::getNumber() {
  */
 uint8_t Pin::getOffset() {
 	return _offset;
+}
+
+/**
+	Get the pin timer
+
+	@return pin timer
+ */
+uint8_t Pin::getTimer() {
+	return _timer;
 }
 
 /**
