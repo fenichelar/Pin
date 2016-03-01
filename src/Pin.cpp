@@ -35,6 +35,9 @@ struct pinMapping {
 	#include "boards/leonardo.h"  ///< Include the pin mappings for the Arduino Leonardo
 #endif
 
+#ifndef PWMRANGE
+#define PWMRange 255
+#endif
 
 // ################################# Constructors #################################
 
@@ -94,6 +97,11 @@ uint8_t Pin::getNumber() {
 uint8_t Pin::getOffset() {
 	return _offset;
 }
+
+float Pin::getDuty() {
+	return _duty;
+}
+
 
 /**
 	Get a pointer to the PIN register
@@ -216,6 +224,7 @@ bool Pin::setState(uint8_t state) {
 	return true;
 }
 
+
 // #################### Input ####################
 
 /**
@@ -292,6 +301,24 @@ void Pin::setOutputHigh() {
 void Pin::setOutputLow() {
 	DDR_HIGH;
 	PORT_LOW;
+}
+
+/**
+	Set the "analog" pwm level for the pin.
+
+	@param the duty cycle for the PWM setting. 0 is min, 1 is MAX, and is platform-spoecific to PWMRANGE
+	@return true if pin successfully updated, false otherwise
+ */
+
+#define NORMALIZE(F) F > 1 ? F - floor(F) : F < 0 ? abs(F) - floor(abs(F)) : F
+
+void Pin::setDuty(float duty) {
+
+	if (_duty < 0) // make sure frquency is at max first, and only once.
+		TCCR0B = TCCR0B & 0b11111000 | 0b001 ; // set to divide-by-1 prescale
+
+	_duty = NORMALIZE(duty); // could also use min(0,max(1.0, percent))
+	analogWrite(_number, _duty * PWMRANGE); // This is where direct port manipulation should be.
 }
 
 // #################### Toggle ####################
