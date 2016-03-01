@@ -5,13 +5,9 @@
 	@details Arduino library for fast access to Arduino I/O pins using port manipulation
  */
 
+#pragma once
 
-#include "Arduino.h"
-
-
-#ifndef Pin_H
-#define Pin_H
-
+#include <Arduino.h>
 
 // ################################# Defines #################################
 
@@ -25,6 +21,9 @@
 #define PORT_ON (*_PORT & _offset)  ///< Get the PORT register for the pin (HIGH, LOW)
 #define PIN_ON (*_PIN & _offset)  ///< Get the PIN register for the pin (HIGH, LOW)
 
+#ifndef PWMRANGE
+#define PWMRANGE 255
+#endif
 
 /**
 	Class for fast access to Arduino I/O pins using port manipulation
@@ -47,12 +46,15 @@ class Pin {
 		uint8_t getMode();
 		uint8_t getState();
 		uint8_t getValue();
+    float getDuty();
 
 		// #################### Setters ####################
 		// Generic
 		bool set(uint8_t mode, uint8_t state);
 		bool setMode(uint8_t mode);
 		bool setState(uint8_t state);
+    void setDuty(float);
+
 		// Input
 		void setInput();
 		void setPullupOn();
@@ -79,6 +81,5 @@ class Pin {
 		volatile uint8_t* _PIN;
 		volatile uint8_t* _PORT;
 		volatile uint8_t* _DDR;
+    float _duty = -1;
 };
-
-#endif
