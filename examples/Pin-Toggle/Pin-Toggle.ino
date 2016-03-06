@@ -7,14 +7,15 @@
 
 #include <Pin.h>  // Include Pin library
 
-Pin myPin = Pin(5);  // Create Pin object for digital pin labelled 5 on any of the supported boards
+Pin myPin(5);  // Create Pin object for digital pin 5
 
 /**
   Called at start
  */
 void setup() {
   myPin.setOutput();  // Set Pin to output mode
-  myPin.setHigh();  // Set Pin to output high
+  myPin.setHigh();    // Set Pin to output high
+                      // or myPin.setOutputHigh();
 }
 
 /**
@@ -22,5 +23,5 @@ void setup() {
  */
 void loop() {
   myPin.toggleState();  // Set Pin to output the opposite of the previous output (HIGH -> LOW, LOW -> HIGH)
-  delay(200);  // Wait 200 milliseconds
+  delay(200);           // Wait 200 milliseconds
 }
