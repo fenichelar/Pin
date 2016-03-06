@@ -5,47 +5,31 @@
 	@details Arduino library for fast access to Arduino I/O pins using port manipulation
  */
 
-
+#include <Arduino.h>
 #include "Pin.h"
 
-
-// ################################# Constructors #################################
+// ################################# Constructor #################################
 
 /**
 	Basic constructor
-
 	@param number pin number written on board if digital, then the first analog pin is at the index after the last digital pin
- */
-Pin::Pin(uint8_t number) {
-	init(number);
-}
-
-/**
-	Easier constructor
-
-	@param number pin number written on board
-	@param analog true if pin is analog, false if pin is digital
+	@param analog true if pin is analog, false if pin is digital, defaults to false
  */
 Pin::Pin(uint8_t number, bool analog) {
-	if (analog) {
-		init(analogInputToDigitalPin(number));
-	} else {
-		init(number);
-	}
+	analog ? init(analogInputToDigitalPin(number)) : init(number);
 }
 
 /**
 	Construct a pin, not called by user, use wrapper constructors above
-
 	@param number pin number written on board if digital, then the first analog pin is at the index after the last digital pin
  */
 void Pin::init(uint8_t number) {
 	_number = number;
 	_offset = digitalPinToBitMask(_number);
-	_timer = digitalPinToTimer(_number);
-	_PIN = portInputRegister(digitalPinToPort(_number));
-	_PORT = portOutputRegister(digitalPinToPort(_number));
-	_DDR = portModeRegister(digitalPinToPort(_number));
+	 _timer = digitalPinToTimer(_number);
+	   _PIN = portInputRegister(digitalPinToPort(_number));
+	  _PORT = portOutputRegister(digitalPinToPort(_number));
+	   _DDR = portModeRegister(digitalPinToPort(_number));
 }
 
 
@@ -53,7 +37,6 @@ void Pin::init(uint8_t number) {
 
 /**
 	Get the pin number
-
 	@return pin number
  */
 uint8_t Pin::getNumber() {
@@ -62,7 +45,6 @@ uint8_t Pin::getNumber() {
 
 /**
 	Get the pin offset
-
 	@return pin offset
  */
 uint8_t Pin::getOffset() {
@@ -71,7 +53,6 @@ uint8_t Pin::getOffset() {
 
 /**
 	Get the pin timer
-
 	@return pin timer
  */
 uint8_t Pin::getTimer() {
@@ -80,7 +61,6 @@ uint8_t Pin::getTimer() {
 
 /**
 	Get a pointer to the PIN register
-
 	@return pointer to the PIN register
  */
 volatile uint8_t* Pin::getPIN() {
@@ -89,7 +69,6 @@ volatile uint8_t* Pin::getPIN() {
 
 /**
 	Get a pointer to the PORT register
-
 	@return pointer to the PORT register
  */
 volatile uint8_t* Pin::getPORT() {
@@ -98,7 +77,6 @@ volatile uint8_t* Pin::getPORT() {
 
 /**
 	Get a pointer to the DDR register
-
 	@return pointer to the DDR register
  */
 volatile uint8_t* Pin::getDDR() {
@@ -107,28 +85,18 @@ volatile uint8_t* Pin::getDDR() {
 
 /**
 	Get the mode of the pin from the DDR register
-
 	@return mode of the pin (OUTPUT, INPUT)
  */
 uint8_t Pin::getMode() {
-	if (DDR_ON) {
-		return OUTPUT;
-	} else {
-		return INPUT;
-	}
+  return DDR_ON ? OUTPUT : INPUT;
 }
 
 /**
 	Get the state of the pin from the PORT register
-
 	@return state of the pin (HIGH, LOW)
  */
 uint8_t Pin::getState() {
-	if (PORT_ON) {
-		return HIGH;
-	} else {
-		return LOW;
-	}
+	return PORT_ON ? HIGH : LOW;
 }
 
 /**
@@ -137,13 +105,8 @@ uint8_t Pin::getState() {
 	@return value of the pin (HIGH, LOW)
  */
 uint8_t Pin::getValue() {
-	if (PIN_ON) {
-		return HIGH;
-	} else {
-		return LOW;
-	}
+	return PIN_ON ? HIGH : LOW;
 }
-
 
 // ################################# Setters #################################
 
@@ -169,34 +132,16 @@ bool Pin::set(uint8_t mode, uint8_t state) {
 	@return true if pin successfully updated, false otherwise
  */
 bool Pin::setMode(uint8_t mode) {
-	if (mode == INPUT) {
-		DDR_LOW;
-	} else if (mode == OUTPUT) {
-		DDR_HIGH;
-	} else {
-		return false;
-	}
-
-	return true;
+  return mode == INPUT ? DDR_LOW : mode == OUTPUT ? DDR_HIGH : false;
 }
 
 /**
 	Set the pin state
-
 	@param state the state of the pin (HIGH, LOW)
-
 	@return true if pin successfully updated, false otherwise
  */
 bool Pin::setState(uint8_t state) {
-	if (state == LOW) {
-		PORT_LOW;
-	} else if (state == HIGH) {
-		PORT_HIGH;
-	} else {
-		return false;
-	}
-
-	return true;
+  return state == LOW ? PORT_LOW : state == HIGH ? PORT_HIGH : false;
 }
 
 // #################### Input ####################
@@ -283,20 +228,12 @@ void Pin::setOutputLow() {
 	Toggle the pin mode (OUTPUT -> INPUT, INPUT -> OUTPUT)
  */
 void Pin::toggleMode() {
-	if (DDR_ON) {
-		DDR_LOW;
-	} else {
-		DDR_HIGH;
-	}
+  DDR_ON ? DDR_LOW : DDR_HIGH;
 }
 
 /**
 	Toggle the pin state (HIGH -> LOW, LOW -> HIGH)
  */
 void Pin::toggleState() {
-	if (PORT_ON) {
-		PORT_LOW;
-	} else {
-		PORT_HIGH;
-	}
+  PORT_ON ? PORT_LOW : PORT_HIGH;
 }
