@@ -9,8 +9,7 @@
 #include "Arduino.h"
 
 
-#ifndef Pin_H
-#define Pin_H
+#pragma once
 
 
 // ################################# Defines #################################
@@ -65,6 +64,7 @@ class Pin {
 		void setLow();
 		void setOutputHigh();
 		void setOutputLow();
+		void setDutyCycle(int value);
 		// Toggle
 		void toggleMode();
 		void toggleState();
@@ -80,5 +80,3 @@ class Pin {
 		volatile uint8_t* _PORT;
 		volatile uint8_t* _DDR;
 };
-
-#endif

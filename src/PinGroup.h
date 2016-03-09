@@ -9,8 +9,7 @@
 #include "Pin.h"
 
 
-#ifndef PinGroup_H
-#define PinGroup_H
+#pragma once
 
 
 // ################################# Defines #################################
@@ -206,5 +205,3 @@ bool checkPinGroup(Pin (&pins)[N]) {
 
 	return true;
 }
-
-#endif

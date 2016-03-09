@@ -47,6 +47,12 @@ myPin.setHigh();
 myPin.setLow();
 ~~~~~~~~~~~~~
 
+## PWM
+Set duty cycle to ~50% (not all pins support PWM)
+~~~~~~~~~~~~~{.cpp}
+myPin.setDutyCycle(127);
+~~~~~~~~~~~~~
+
 ## Get Pin Info
 Get mode (INPUT/OUTPUT)
 ~~~~~~~~~~~~~{.cpp}
@@ -73,7 +79,7 @@ myPin.toggleState();
 
 ## Simultaneous Operations on Multiple Pins
 
-All Pins in array must use the same DDR, PORT, and PIN registers. Look at the corresponding file in the boards directory to determine what registers each pin uses on a given board. Because this library is built for speed, the array of pins is not automatically checked to be valid for simultaneous operations. An invalid array will produce unexpected results without error, therefore it is highly recommended that the array be validated using the `checkPinGroup` function during setup.
+All Pins in array must use the same DDR, PORT, and PIN registers. Look at the Arduino documentation for your board to determine what registers each pin uses. Because this library is built for speed, the array of pins is not automatically checked to be valid for simultaneous operations. An invalid array will produce unexpected results without error, therefore it is highly recommended that the array be validated using the `checkPinGroup()` function during setup.
 
 Import Pin library with support for simultaneous operations
 ~~~~~~~~~~~~~{.cpp}

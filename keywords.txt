@@ -25,6 +25,7 @@ setHigh	KEYWORD2
 setLow	KEYWORD2
 setOutputHigh	KEYWORD2
 setOutputLow	KEYWORD2
+setDutyCycle	KEYWORD2
 
 toggleMode	KEYWORD2
 toggleState	KEYWORD2

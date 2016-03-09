@@ -9,7 +9,7 @@
 #include <PinGroup.h>  // Include Pin library group functions
 
 // The Pins used in this array must all be on the same DDR and PORT registers
-// Look at the coresponding file in the boards directory to determine what register each pin is on
+// Look at the Arduino documentation for your board to determine what registers each pin uses
 Pin myPinGroup[] = {2,3,5};  // Create array of Pin objects for digital pins labelled 2,3,5 on the Arduino Uno or Mega (not valid for Leonardo)
 
 /**
@@ -32,6 +32,10 @@ void setup() {
  */
 void loop() {
   setOutputLow(myPinGroup);  // Simultaneously set array of Pins to output low
+
+  delay(200);  // Wait 200 milliseconds
+
+  setOutputHigh(myPinGroup);  // Simultaneously set array of Pins to output high
 
   delay(200);  // Wait 200 milliseconds
 
