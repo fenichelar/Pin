@@ -67,6 +67,11 @@ Get value (HIGH/LOW)
 myPin.getValue();
 ~~~~~~~~~~~~~
 
+Get analog value (0-1023)
+~~~~~~~~~~~~~{.cpp}
+myPin.getAnalogValue();
+~~~~~~~~~~~~~
+
 ## Toggle
 Toggle mode (OUTPUT -> INPUT, INPUT -> OUTPUT)
 ~~~~~~~~~~~~~{.cpp}
