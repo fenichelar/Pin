@@ -144,6 +144,15 @@ uint8_t Pin::getValue() {
 	}
 }
 
+/**
+	Get the analog value of the pin
+
+	@return analog value of the pin (0-1023)
+ */
+uint16_t Pin::getAnalogValue() {
+	return analogRead(_number);
+}
+
 
 // ################################# Setters #################################
 
@@ -280,7 +289,7 @@ void Pin::setOutputLow() {
 /**
 	Set the PWM duty cycle
 
-  @param value the duty cycle (0-255)
+	@param value the duty cycle (0-255)
  */
 void Pin::setDutyCycle(int value) {
 	analogWrite(_number,value);

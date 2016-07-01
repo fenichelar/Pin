@@ -9,6 +9,7 @@ getDDR	KEYWORD2
 getMode	KEYWORD2
 getState	KEYWORD2
 getValue	KEYWORD2
+getAnalogValue	KEYWORD2
 
 set	KEYWORD2
 setMode	KEYWORD2

@@ -46,6 +46,7 @@ class Pin {
 		uint8_t getMode();
 		uint8_t getState();
 		uint8_t getValue();
+		uint16_t getAnalogValue();
 
 		// #################### Setters ####################
 		// Generic
