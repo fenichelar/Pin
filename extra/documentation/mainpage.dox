@@ -3,5 +3,5 @@
 @author Alec Fenichel
 @date 2015
 @brief Arduino Pin library
-@details An easy to use Arduino library for fast digital I/O using port manipulation.
+@details An easy to use Arduino library for fast and simultaneous operations to Arduino I/O pins using port manipulation.
 */
