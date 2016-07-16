@@ -1,6 +1,15 @@
 Arduino Pin Library
 ===
-An easy to use Arduino library for fast digital I/O using port manipulation. Capable of simultaneous operations on multiple Pins. Supports Arduino Mega, Arduino Uno, and Arduino Leonardo. Complete documentation can be found [here](https://pin.fenichelar.com). Source code can be found [here](https://github.com/fenichelar/Pin). Common uses are listed below.
+An easy to use Arduino library for fast and simultaneous operations to Arduino I/O pins using port manipulation. Supports Arduino AVR boards natively and custom boards by manually defining register addresses. Complete documentation can be found [here](https://pin.fenichelar.com). Source code can be found [here](https://github.com/fenichelar/Pin). Common uses are listed below.
+
+## Background
+Background information about how direct port manipulation works can be found [here](https://www.arduino.cc/en/Reference/PortManipulation).
+
+## Advantages
+ - Much faster than built in digital functions
+ - More portable and easier to read than direct port manipulation
+ - Allows for simultaneous operations on multiple pins
+ - Supports custom boards (`getAnalogValue()` and `setDutyCycle(int value)` not supported)
 
 ## Install
 Install from the Arduino Library Manager or download the latest release [here](https://github.com/fenichelar/Pin/releases/latest).
@@ -84,34 +93,47 @@ myPin.toggleState();
 
 ## Simultaneous Operations on Multiple Pins
 
-All Pins in array must use the same DDR, PORT, and PIN registers. Look at the Arduino documentation for your board to determine what registers each pin uses. Because this library is built for speed, the array of pins is not automatically checked to be valid for simultaneous operations. An invalid array will produce unexpected results without error, therefore it is highly recommended that the array be validated using the `checkPinGroup()` function during setup.
+All Pins in array must use the same DDR, PORT, and PIN registers. Look at the Arduino documentation for your board to determine what registers each pin uses. Because this library is built for speed, the Pin Group is not automatically checked to be valid for simultaneous operations. An invalid array will produce unexpected results without error, therefore it is highly recommended that the array be validated using the `isValid()` function during setup.
 
-Import Pin library with support for simultaneous operations
+Import Pin Library with support for simultaneous operations
 ~~~~~~~~~~~~~{.cpp}
 #include <Pin.h>
 #include <PinGroup.h>
 ~~~~~~~~~~~~~
 Create array of Pins for simultaneous operations
 ~~~~~~~~~~~~~{.cpp}
-Pin myPinGroup[] = {2,3,5};
+Pin myPins[] = {Pin(2),Pin(3),Pin(5)};
+PinGroup myPinGroup = PinGroup(myPins);
 ~~~~~~~~~~~~~
-Check to ensure all pins in array of pins use the same registers
+Check to ensure all Pins in Pin Group use the same registers
 ~~~~~~~~~~~~~{.cpp}
-checkPinGroup(myPinGroup) == true
+myPinGroup.isValid() == true
 ~~~~~~~~~~~~~
-Simultaneously set mode for array of Pins to input
+Simultaneously set mode for Pin Group to input/output
 ~~~~~~~~~~~~~{.cpp}
-setInput(myPinGroup);
+myPinGroup.setInput();
 ~~~~~~~~~~~~~
-Simultaneously set mode for array of Pins to output
 ~~~~~~~~~~~~~{.cpp}
-setOutput(myPinGroup);
+myPinGroup.setOutput();
 ~~~~~~~~~~~~~
-Simultaneously check if array of Pins are all HIGH
+Simultaneously set all Pins in Pin Group to HIGH/LOW
 ~~~~~~~~~~~~~{.cpp}
-getValue(myPinGroup) == HIGH
+myPinGroup.setHigh();
 ~~~~~~~~~~~~~
-Simultaneously check if array of Pins are all LOW
 ~~~~~~~~~~~~~{.cpp}
-getValue(myPinGroup) == LOW
+myPinGroup.setLow();
+~~~~~~~~~~~~~
+Simultaneously check if all Pins in Pin Group are HIGH/LOW
+~~~~~~~~~~~~~{.cpp}
+myPinGroup.getValue() == HIGH
+~~~~~~~~~~~~~
+~~~~~~~~~~~~~{.cpp}
+myPinGroup.getValue() == LOW
+~~~~~~~~~~~~~
+Simultaneously set each Pin in Pin Group to its opposite mode/state
+~~~~~~~~~~~~~{.cpp}
+myPinGroup.toggleMode();
+~~~~~~~~~~~~~
+~~~~~~~~~~~~~{.cpp}
+myPinGroup.toggleState();
 ~~~~~~~~~~~~~

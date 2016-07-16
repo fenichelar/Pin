@@ -2,10 +2,10 @@
   @file Pin-PWM.ino
   @author Alec Fenichel
   @brief Pin PWM example
-  @details Use PWM with the Pin library
+  @details Use PWM with the Pin Library
 */
 
-#include <Pin.h>  // Include Pin library
+#include <Pin.h>  // Include Pin Library
 
 Pin myPin = Pin(5);  // Create Pin object for digital pin labelled 5 on any of the supported boards
 
@@ -14,6 +14,7 @@ Pin myPin = Pin(5);  // Create Pin object for digital pin labelled 5 on any of t
  */
 void setup() {
   myPin.setOutput();  // Set Pin to output mode
+
   // The Pin must support PWM
   myPin.setDutyCycle(127);  // Set Pin duty cycle to 127 (~50%)
 }

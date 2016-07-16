@@ -1,13 +1,13 @@
 /**
-  @file Pin-Toggle.ino
+  @file Pin-Custom.ino
   @author Alec Fenichel
-  @brief Pin toggle example
-  @details Quickly toggling a Pins output
+  @brief Pin custom example
+  @details Quickly toggling a custom Pins output
 */
 
 #include <Pin.h>  // Include Pin Library
 
-Pin myPin = Pin(13);  // Create Pin object for digital pin labelled 13 on any of the supported boards
+Pin myPin = Pin(13, 1<<7, TIMER0A, &PINB, &PORTB, &DDRB);  // Create Pin object for digital pin labelled 13 on Arduino Mega, getAnalogValue() and setDutyCycle(int value) not supported
 
 /**
   Called at start

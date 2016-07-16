@@ -1,6 +1,8 @@
 Pin	KEYWORD1
+PinGroup	KEYWORD1
 
 getNumber	KEYWORD2
+getNumbers	KEYWORD2
 getOffset	KEYWORD2
 getTimer	KEYWORD2
 getPIN	KEYWORD2
@@ -10,6 +12,7 @@ getMode	KEYWORD2
 getState	KEYWORD2
 getValue	KEYWORD2
 getAnalogValue	KEYWORD2
+isValid	KEYWORD2
 
 set	KEYWORD2
 setMode	KEYWORD2
@@ -30,5 +33,3 @@ setDutyCycle	KEYWORD2
 
 toggleMode	KEYWORD2
 toggleState	KEYWORD2
-
-checkPinGroup	KEYWORD2

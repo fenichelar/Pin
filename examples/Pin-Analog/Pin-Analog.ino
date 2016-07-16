@@ -2,13 +2,13 @@
   @file Pin-Analog.ino
   @author Alec Fenichel
   @brief Pin analog example
-  @details Use analog pins with the Pin library
+  @details Use analog pins with the Pin Library
 */
 
-#include <Pin.h>  // Include Pin library
+#include <Pin.h>  // Include Pin Library
 
-Pin myPin0 = Pin(0, true);  // Create Pin object for analog pin labelled A0 on any of the supported boards
-Pin myPin1 = Pin(17);  // Create Pin object for analog pin labelled A3 on the Arduino Uno (Pin(17) = Pin(3, true) for the Arduino Uno)
+Pin myPin0 = Pin(A0);  // Create Pin object for analog pin labelled A0 on any of the supported boards
+Pin myPin1 = Pin(17);  // Create Pin object for analog pin labelled A3 on the Arduino Uno (Pin(17) = Pin(A3) for the Arduino Uno)
 
 /**
   Called at start
@@ -25,8 +25,11 @@ void setup() {
  */
 void loop() {
 
-  Serial.println("AA value: " + myPin0.getAnalogValue()); // Read the analog value of the pin
-  Serial.println("A3 value: " + myPin1.getAnalogValue()); // Read the analog value of the pin
+  // Read the analog value of the Pins
+  Serial.print("A0 value: ");
+  Serial.println(myPin0.getAnalogValue());
+  Serial.print("17 value: ");
+  Serial.println(myPin1.getAnalogValue());
 
-  delay(200);  // Wait 200 milliseconds
+  delay(500);  // Wait 500 milliseconds
 }

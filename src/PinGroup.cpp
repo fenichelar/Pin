@@ -1,61 +1,23 @@
 /**
-	@file Pin.cpp
+	@file PinGroup.cpp
 	@author Alec Fenichel
 	@brief Arduino Pin library
 	@details Arduino library for fast and simultaneous operations to Arduino I/O pins using port manipulation
  */
 
 
-#include "Pin.h"
-
-
-// ################################# Constructors #################################
-
-/**
-	Arduino supported board constructor
-
-	@param number pin number written on board
- */
-Pin::Pin(uint8_t number) {
-	_number = number;
-	_offset = digitalPinToBitMask(_number);
-	_timer = digitalPinToTimer(_number);
-	_PIN = portInputRegister(digitalPinToPort(_number));
-	_PORT = portOutputRegister(digitalPinToPort(_number));
-	_DDR = portModeRegister(digitalPinToPort(_number));
-}
-
-/**
-	Custom board constructor
-
-	getAnalogValue() and setDutyCycle(int value) not supported
-
-	@param number pin number written on board
-	@param offset bit mask used to access pin in registers
-	@param timer timer for pin
-	@param PIN input register for pin
-	@param PORT data register for pin
-	@param DDR data direction register for pin
- */
-Pin::Pin(uint8_t number, uint8_t offset, uint8_t timer, volatile uint8_t* PIN, volatile uint8_t* PORT, volatile uint8_t* DDR) {
-	_number = number;
-	_offset = offset;
-	_timer = timer;
-	_PIN = PIN;
-	_PORT = PORT;
-	_DDR = DDR;
-}
+#include "PinGroup.h"
 
 
 // ################################# Getters #################################
 
 /**
-	Get the pin number
+	Get the pin numbers
 
-	@return pin number
+	@return array of pin numbers
  */
-uint8_t Pin::getNumber() {
-	return _number;
+uint8_t* PinGroup::getNumbers() {
+	return _numbers;
 }
 
 /**
@@ -63,17 +25,8 @@ uint8_t Pin::getNumber() {
 
 	@return pin offset
  */
-uint8_t Pin::getOffset() {
+uint8_t PinGroup::getOffset() {
 	return _offset;
-}
-
-/**
-	Get the pin timer
-
-	@return pin timer
- */
-uint8_t Pin::getTimer() {
-	return _timer;
 }
 
 /**
@@ -81,7 +34,7 @@ uint8_t Pin::getTimer() {
 
 	@return pointer to the PIN register
  */
-volatile uint8_t* Pin::getPIN() {
+volatile uint8_t* PinGroup::getPIN() {
 	return _PIN;
 }
 
@@ -90,7 +43,7 @@ volatile uint8_t* Pin::getPIN() {
 
 	@return pointer to the PORT register
  */
-volatile uint8_t* Pin::getPORT() {
+volatile uint8_t* PinGroup::getPORT() {
 	return _PORT;
 }
 
@@ -99,56 +52,62 @@ volatile uint8_t* Pin::getPORT() {
 
 	@return pointer to the DDR register
  */
-volatile uint8_t* Pin::getDDR() {
+volatile uint8_t* PinGroup::getDDR() {
 	return _DDR;
 }
 
 /**
 	Get the mode of the pin from the DDR register
 
-	@return mode of the pin (OUTPUT, INPUT)
+	@return mode of the pin (OUTPUT, INPUT, -1)
  */
-uint8_t Pin::getMode() {
-	if (DDR_ON) {
-		return OUTPUT;
+uint8_t PinGroup::getMode() {
+	if (DDR_ON == _offset) {
+		return HIGH;
+	} else if (DDR_OFF == ~_offset) {
+		return LOW;
 	} else {
-		return INPUT;
+		return -1;
 	}
 }
 
 /**
 	Get the state of the pin from the PORT register
 
-	@return state of the pin (HIGH, LOW)
+	@return state of the pin (HIGH, LOW, -1)
  */
-uint8_t Pin::getState() {
-	if (PORT_ON) {
+uint8_t PinGroup::getState() {
+	if (PORT_ON == _offset) {
 		return HIGH;
-	} else {
+	} else if (PORT_OFF == ~_offset) {
 		return LOW;
+	} else {
+		return -1;
 	}
 }
 
 /**
 	Get the value of the pin from the PIN register
 
-	@return value of the pin (HIGH, LOW)
+	@return value of the pin (HIGH, LOW, -1)
  */
-uint8_t Pin::getValue() {
-	if (PIN_ON) {
+uint8_t PinGroup::getValue() {
+	if (PIN_ON == _offset) {
 		return HIGH;
-	} else {
+	} else if (PIN_OFF == ~_offset) {
 		return LOW;
+	} else {
+		return -1;
 	}
 }
 
 /**
-	Get the analog value of the pin
+	Check the group to ensure all pins use the same registers
 
-	@return analog value of the pin (0-1023)
+	@return true if the pins in the group all use the same registers, false otherwise
  */
-uint16_t Pin::getAnalogValue() {
-	return analogRead(_number);
+bool PinGroup::isValid() {
+	return _valid;
 }
 
 
@@ -164,7 +123,7 @@ uint16_t Pin::getAnalogValue() {
 
 	@return true if pin successfully updated, false otherwise
  */
-bool Pin::set(uint8_t mode, uint8_t state) {
+bool PinGroup::set(uint8_t mode, uint8_t state) {
 	return (setMode(mode) && setState(state));
 }
 
@@ -175,7 +134,7 @@ bool Pin::set(uint8_t mode, uint8_t state) {
 
 	@return true if pin successfully updated, false otherwise
  */
-bool Pin::setMode(uint8_t mode) {
+bool PinGroup::setMode(uint8_t mode) {
 	if (mode == INPUT) {
 		DDR_LOW;
 	} else if (mode == OUTPUT) {
@@ -194,7 +153,7 @@ bool Pin::setMode(uint8_t mode) {
 
 	@return true if pin successfully updated, false otherwise
  */
-bool Pin::setState(uint8_t state) {
+bool PinGroup::setState(uint8_t state) {
 	if (state == LOW) {
 		PORT_LOW;
 	} else if (state == HIGH) {
@@ -211,28 +170,28 @@ bool Pin::setState(uint8_t state) {
 /**
 	Set the pin mode to input
  */
-void Pin::setInput() {
+void PinGroup::setInput() {
 	DDR_LOW;
 }
 
 /**
 	Set the pin pullup resistor to on
  */
-void Pin::setPullupOn() {
+void PinGroup::setPullupOn() {
 	PORT_HIGH;
 }
 
 /**
 	Set the pin pullup resistor to off
  */
-void Pin::setPullupOff() {
+void PinGroup::setPullupOff() {
 	PORT_LOW;
 }
 
 /**
 	Set the pin mode to input and the pin pullup resistor to on
  */
-void Pin::setInputPullupOn() {
+void PinGroup::setInputPullupOn() {
 	DDR_LOW;
 	PORT_HIGH;
 }
@@ -240,7 +199,7 @@ void Pin::setInputPullupOn() {
 /**
 	Set the pin mode to input and the pin pullup resistor to off
  */
-void Pin::setInputPullupOff() {
+void PinGroup::setInputPullupOff() {
 	DDR_LOW;
 	PORT_LOW;
 }
@@ -250,28 +209,28 @@ void Pin::setInputPullupOff() {
 /**
 	Set the pin mode to output
  */
-void Pin::setOutput() {
+void PinGroup::setOutput() {
 	DDR_HIGH;
 }
 
 /**
 	Set the pin output to HIGH
  */
-void Pin::setHigh() {
+void PinGroup::setHigh() {
 	PORT_HIGH;
 }
 
 /**
 	Set the pin output to LOW
  */
-void Pin::setLow() {
+void PinGroup::setLow() {
 	PORT_LOW;
 }
 
 /**
 	Set the pin mode to output and the pin output to HIGH
  */
-void Pin::setOutputHigh() {
+void PinGroup::setOutputHigh() {
 	DDR_HIGH;
 	PORT_HIGH;
 }
@@ -279,18 +238,9 @@ void Pin::setOutputHigh() {
 /**
 	Set the pin mode to output and the pin output to LOW
  */
-void Pin::setOutputLow() {
+void PinGroup::setOutputLow() {
 	DDR_HIGH;
 	PORT_LOW;
-}
-
-/**
-	Set the PWM duty cycle
-
-	@param value the duty cycle (0-255)
- */
-void Pin::setDutyCycle(int value) {
-	analogWrite(_number,value);
 }
 
 // #################### Toggle ####################
@@ -298,13 +248,13 @@ void Pin::setDutyCycle(int value) {
 /**
 	Toggle the pin mode (OUTPUT -> INPUT, INPUT -> OUTPUT)
  */
-void Pin::toggleMode() {
+void PinGroup::toggleMode() {
 	DDR_TOGGLE;
 }
 
 /**
 	Toggle the pin state (HIGH -> LOW, LOW -> HIGH)
  */
-void Pin::toggleState() {
+void PinGroup::toggleState() {
 	PORT_TOGGLE;
 }

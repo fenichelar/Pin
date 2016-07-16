@@ -2,7 +2,7 @@
 	@file Pin.h
 	@author Alec Fenichel
 	@brief Arduino Pin library
-	@details Arduino library for fast access to Arduino I/O pins using port manipulation
+	@details Arduino library for fast and simultaneous operations to Arduino I/O pins using port manipulation
  */
 
 
@@ -15,14 +15,21 @@
 // ################################# Defines #################################
 
 #define DDR_HIGH (*_DDR |= _offset)  ///< Set the DDR register to HIGH for the pin
+#define DDR_TOGGLE (*_DDR ^= _offset)  ///< Set the DDR register to the inverse for the pin
 #define DDR_LOW (*_DDR &= ~_offset)  ///< Set the DDR register to LOW for the pin
 
 #define PORT_HIGH (*_PORT |= _offset)  ///< Set the PORT register to HIGH for the pin
+#define PORT_TOGGLE (*_PORT ^= _offset)  ///< Set the PORT register to the inverse for the pin
 #define PORT_LOW (*_PORT &= ~_offset)  ///< Set the PORT register to LOW for the pin
 
-#define DDR_ON (*_DDR & _offset)  ///< Get the DDR register for the pin (HIGH, LOW)
-#define PORT_ON (*_PORT & _offset)  ///< Get the PORT register for the pin (HIGH, LOW)
-#define PIN_ON (*_PIN & _offset)  ///< Get the PIN register for the pin (HIGH, LOW)
+#define DDR_ON (*_DDR & _offset)  ///< Get the DDR register for the pin (HIGH, LOW) with other pins forced to 0
+#define DDR_OFF (*_DDR | ~ _offset)  ///< Get the DDR register for the pin (HIGH, LOW) with other pins forced to 1
+
+#define PORT_ON (*_PORT & _offset)  ///< Get the PORT register for the pin (HIGH, LOW) with other pins forced to 0
+#define PORT_OFF (*_PORT | ~ _offset)  ///< Get the PORT register for the pin (HIGH, LOW) with other pins forced to 1
+
+#define PIN_ON (*_PIN & _offset)  ///< Get the PIN register for the pin (HIGH, LOW) with other pins forced to 0
+#define PIN_OFF (*_PIN | ~ _offset)  ///< Get the PIN register for the pin (HIGH, LOW) with other pins forced to 1
 
 
 /**
@@ -34,7 +41,7 @@ class Pin {
 	public:
 		// #################### Constructors ####################
 		Pin(uint8_t number);
-		Pin(uint8_t number, bool analog);
+		Pin(uint8_t number, uint8_t offset, uint8_t timer, volatile uint8_t* PIN, volatile uint8_t* PORT, volatile uint8_t* DDR);
 
 		// #################### Getters ####################
 		uint8_t getNumber();
@@ -71,8 +78,6 @@ class Pin {
 		void toggleState();
 
 	private:
-		// Constructor
-		void init(uint8_t number);
 		// Variables
 		uint8_t _number;
 		uint8_t _offset;
