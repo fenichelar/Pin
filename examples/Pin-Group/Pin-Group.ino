@@ -18,7 +18,7 @@ PinGroup myPinGroup = PinGroup(myPins);  // Create a Pin Group
   Called at start
  */
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(9600);  // Start serial communication at 9600 baud
 
   // Check to ensure all Pins in the Pin Group use the same registers
   if(myPinGroup.isValid()) {

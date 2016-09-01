@@ -2,7 +2,7 @@
   @file Pin-PWM.ino
   @author Alec Fenichel
   @brief Pin PWM example
-  @details Use PWM with the Pin Library
+  @details Use PWM
 */
 
 #include <Pin.h>  // Include Pin Library

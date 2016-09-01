@@ -2,7 +2,7 @@
   @file Pin-Analog.ino
   @author Alec Fenichel
   @brief Pin analog example
-  @details Use analog pins with the Pin Library
+  @details Read analog pins
 */
 
 #include <Pin.h>  // Include Pin Library
@@ -14,7 +14,7 @@ Pin myPin1 = Pin(17);  // Create Pin object for analog pin labelled A3 on the Ar
   Called at start
  */
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(9600);  // Start serial communication at 9600 baud
 
   myPin0.setInput();  // Set Pin to input mode
   myPin1.setInput();  // Set Pin to input mode
@@ -26,10 +26,8 @@ void setup() {
 void loop() {
 
   // Read the analog value of the Pins
-  Serial.print("A0 value: ");
-  Serial.println(myPin0.getAnalogValue());
-  Serial.print("17 value: ");
-  Serial.println(myPin1.getAnalogValue());
+  Serial.println("A0 value: " + String(myPin0.getAnalogValue()));
+  Serial.println("17 value: " + String(myPin1.getAnalogValue()));
 
   delay(500);  // Wait 500 milliseconds
 }
