@@ -75,7 +75,7 @@ myPin = LOW;
 ~~~~~~~~~~~~~
 
 ## PWM
-Set duty cycle to ~50% (not all pins support PWM)
+Set duty cycle to ~50% (not every Pin supports PWM)
 ~~~~~~~~~~~~~{.cpp}
 myPin.setDutyCycle(127);
 ~~~~~~~~~~~~~
@@ -138,39 +138,39 @@ Create array of Pins for simultaneous operations
 Pin myPins[] = {Pin(2),Pin(3),Pin(5)};
 PinGroup myPinGroup = PinGroup(myPins);
 ~~~~~~~~~~~~~
-Check to ensure all Pins in Pin Group use the same registers
+Check to ensure each Pin in PinGroup use the same registers
 ~~~~~~~~~~~~~{.cpp}
 myPinGroup.isValid();
 ~~~~~~~~~~~~~
-Simultaneously set mode for Pin Group to input
+Simultaneously set mode for each Pin in PinGroup to INPUT
 ~~~~~~~~~~~~~{.cpp}
 myPinGroup.setInput();
 ~~~~~~~~~~~~~
-Simultaneously set mode for Pin Group to output
+Simultaneously set mode for each Pin in PinGroup to OUTPUT
 ~~~~~~~~~~~~~{.cpp}
 myPinGroup.setOutput();
 ~~~~~~~~~~~~~
-Simultaneously set all Pins in Pin Group to HIGH
+Simultaneously set state each Pin in PinGroup to HIGH
 ~~~~~~~~~~~~~{.cpp}
 myPinGroup.setHigh();
 ~~~~~~~~~~~~~
-Simultaneously set all Pins in Pin Group to LOW
+Simultaneously set state each Pin in PinGroup to LOW
 ~~~~~~~~~~~~~{.cpp}
 myPinGroup.setLow();
 ~~~~~~~~~~~~~
-Simultaneously check if all Pins in Pin Group are HIGH
+Simultaneously check if each Pin in PinGroup is HIGH
 ~~~~~~~~~~~~~{.cpp}
 myPinGroup.getValue() == HIGH;
 ~~~~~~~~~~~~~
-Simultaneously check if all Pins in Pin Group are LOW
+Simultaneously check if each Pin in PinGroup is LOW
 ~~~~~~~~~~~~~{.cpp}
 myPinGroup.getValue() == LOW;
 ~~~~~~~~~~~~~
-Simultaneously set each Pin in Pin Group to its opposite mode
+Simultaneously set each Pin in PinGroup to its opposite mode
 ~~~~~~~~~~~~~{.cpp}
 myPinGroup.toggleMode();
 ~~~~~~~~~~~~~
-Simultaneously set each Pin in Pin Group to its opposite state
+Simultaneously set each Pin in PinGroup to its opposite state
 ~~~~~~~~~~~~~{.cpp}
 myPinGroup.toggleState();
 ~~~~~~~~~~~~~
