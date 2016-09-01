@@ -4,6 +4,7 @@ PinGroup	KEYWORD1
 getNumber	KEYWORD2
 getNumbers	KEYWORD2
 getOffset	KEYWORD2
+getInverseOffset	KEYWORD2
 getTimer	KEYWORD2
 getPIN	KEYWORD2
 getPORT	KEYWORD2
@@ -33,3 +34,5 @@ setDutyCycle	KEYWORD2
 
 toggleMode	KEYWORD2
 toggleState	KEYWORD2
+
+rcTimer	KEYWORD2
