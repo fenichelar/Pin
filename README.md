@@ -7,9 +7,19 @@ Background information about how direct port manipulation works can be found [he
 
 ## Advantages
  - Much faster than built in digital functions
- - More portable and easier to read than direct port manipulation
+ - Easier to read than direct port manipulation
  - Allows for simultaneous operations on multiple pins
- - Supports custom boards (`getAnalogValue()` and `setDutyCycle(int value)` not supported)
+ - Portable across all Arduino AVR boards
+ - Supports custom boards (`Pin.getAnalogValue()` and `Pin.setDutyCycle(int value)` not supported)
+
+## Benchmarks
+Simple benchmark programs were created to compare this library to both the built in Arduino functions and direct port manipulation. The three benchmark programs are included in the `examples/Benchmarks` directory. Each program switches pin 13 between HIGH and LOW as quickly as possible. The program flash memory usage and the frequency of the generated square wave are used for comparison. Results:
+
+|                              | Filename                          | Flash Memory Usage | Output Frequency   |
+| ---------------------------- | --------------------------------- | ------------------ | ------------------ |
+| **Arduino**                  | `Arduino-Benchmark.ino`           | 1,354 bytes        | 64.91 kHz          |
+| **Pin Library**              | `Pin-Library-Benchmark.ino`       | 1,164 bytes        | 532.3 kHz          |
+| **Direct Port Manipulation** | `Port-Manipulation-Benchmark.ino` | 648 bytes          | 2661 kHz           |
 
 ## Install
 Install from the Arduino Library Manager or download the latest release [here](https://github.com/fenichelar/Pin/releases/latest).
@@ -35,10 +45,11 @@ Set mode to input
 ~~~~~~~~~~~~~{.cpp}
 myPin.setInput();
 ~~~~~~~~~~~~~
-Enable/disable pullup resistor
+Enable pullup resistor
 ~~~~~~~~~~~~~{.cpp}
 myPin.setPullupOn();
 ~~~~~~~~~~~~~
+Disable pullup resistor
 ~~~~~~~~~~~~~{.cpp}
 myPin.setPullupOff();
 ~~~~~~~~~~~~~
@@ -48,12 +59,19 @@ Set mode to output
 ~~~~~~~~~~~~~{.cpp}
 myPin.setOutput();
 ~~~~~~~~~~~~~
-Set HIGH/LOW
+Set HIGH
 ~~~~~~~~~~~~~{.cpp}
 myPin.setHigh();
 ~~~~~~~~~~~~~
 ~~~~~~~~~~~~~{.cpp}
+myPin = HIGH;
+~~~~~~~~~~~~~
+Set LOW
+~~~~~~~~~~~~~{.cpp}
 myPin.setLow();
+~~~~~~~~~~~~~
+~~~~~~~~~~~~~{.cpp}
+myPin = LOW;
 ~~~~~~~~~~~~~
 
 ## PWM
@@ -75,7 +93,12 @@ Get value (HIGH/LOW)
 ~~~~~~~~~~~~~{.cpp}
 myPin.getValue();
 ~~~~~~~~~~~~~
-
+~~~~~~~~~~~~~{.cpp}
+myPin == HIGH;
+~~~~~~~~~~~~~
+~~~~~~~~~~~~~{.cpp}
+myPin == LOW;
+~~~~~~~~~~~~~
 Get analog value (0-1023)
 ~~~~~~~~~~~~~{.cpp}
 myPin.getAnalogValue();
@@ -89,6 +112,16 @@ myPin.toggleMode();
 Toggle state (HIGH -> LOW, LOW -> HIGH)
 ~~~~~~~~~~~~~{.cpp}
 myPin.toggleState();
+~~~~~~~~~~~~~
+
+## RC Timer
+
+Special function specifically for timing using series resistor-capacitor circuits. Used to get analog information on digital pins. Connect the pin between the variable resistor (force sensitive resistor, photoresistor, etc.) and the capacitor. The function will charge the capacitor through the resistor and count down the timer until it is charged (50% voltage is considered charged). The function returns the value remaining on the counter when the pin state went to HIGH or 0 if the counter reached 0. The higher the resistance, the longer the capacitor will take to charge. Longer charge times mean the counter will be decremented more resulting in a lower value returned. Therefore, higher resistance -> lower value returned, lower resistance -> higher value returned. Finally, the capacitor is discharged to allow the function to be called again.
+
+Decrement a counter starting at 255 until the pin goes HIGH or the counter reaches 0
+~~~~~~~~~~~~~{.cpp}
+myPin.setLow();
+myPin.rcTimer(255);
 ~~~~~~~~~~~~~
 
 ## Simultaneous Operations on Multiple Pins
@@ -107,33 +140,37 @@ PinGroup myPinGroup = PinGroup(myPins);
 ~~~~~~~~~~~~~
 Check to ensure all Pins in Pin Group use the same registers
 ~~~~~~~~~~~~~{.cpp}
-myPinGroup.isValid() == true
+myPinGroup.isValid();
 ~~~~~~~~~~~~~
-Simultaneously set mode for Pin Group to input/output
+Simultaneously set mode for Pin Group to input
 ~~~~~~~~~~~~~{.cpp}
 myPinGroup.setInput();
 ~~~~~~~~~~~~~
+Simultaneously set mode for Pin Group to output
 ~~~~~~~~~~~~~{.cpp}
 myPinGroup.setOutput();
 ~~~~~~~~~~~~~
-Simultaneously set all Pins in Pin Group to HIGH/LOW
+Simultaneously set all Pins in Pin Group to HIGH
 ~~~~~~~~~~~~~{.cpp}
 myPinGroup.setHigh();
 ~~~~~~~~~~~~~
+Simultaneously set all Pins in Pin Group to LOW
 ~~~~~~~~~~~~~{.cpp}
 myPinGroup.setLow();
 ~~~~~~~~~~~~~
-Simultaneously check if all Pins in Pin Group are HIGH/LOW
+Simultaneously check if all Pins in Pin Group are HIGH
 ~~~~~~~~~~~~~{.cpp}
-myPinGroup.getValue() == HIGH
+myPinGroup.getValue() == HIGH;
 ~~~~~~~~~~~~~
+Simultaneously check if all Pins in Pin Group are LOW
 ~~~~~~~~~~~~~{.cpp}
-myPinGroup.getValue() == LOW
+myPinGroup.getValue() == LOW;
 ~~~~~~~~~~~~~
-Simultaneously set each Pin in Pin Group to its opposite mode/state
+Simultaneously set each Pin in Pin Group to its opposite mode
 ~~~~~~~~~~~~~{.cpp}
 myPinGroup.toggleMode();
 ~~~~~~~~~~~~~
+Simultaneously set each Pin in Pin Group to its opposite state
 ~~~~~~~~~~~~~{.cpp}
 myPinGroup.toggleState();
 ~~~~~~~~~~~~~
