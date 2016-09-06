@@ -2,7 +2,7 @@
 	@file PinGroup.h
 	@author Alec Fenichel
 	@brief Arduino Pin library
-	@details Arduino library for fast and simultaneous operations to Arduino I/O pins using port manipulation
+	@details Arduino library for fast and simultaneous operations to Arduino I/O pins
  */
 
 
@@ -12,7 +12,7 @@
 
 
 /**
-	Class for fast simultaneous operations on Arduino I/O pins using port manipulation
+	Class for fast simultaneous operations on Arduino I/O pins
 
 	@author Alec Fenichel
  */
