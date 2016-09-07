@@ -1,5 +1,5 @@
 /**
-  @file Port-Manipulation-Benchmark
+  @example Port-Manipulation-Benchmark.ino
   @author Alec Fenichel
   @brief Port benchmark
   @details Test port manipulation I/O performance

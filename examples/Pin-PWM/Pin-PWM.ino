@@ -1,5 +1,5 @@
 /**
-  @file Pin-PWM.ino
+  @example Pin-PWM.ino
   @author Alec Fenichel
   @brief Pin PWM example
   @details Use PWM

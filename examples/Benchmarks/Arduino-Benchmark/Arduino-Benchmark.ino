@@ -1,5 +1,5 @@
 /**
-  @file Arduino-Benchmark.ino
+  @example Arduino-Benchmark.ino
   @author Alec Fenichel
   @brief Arduino benchmark
   @details Test Arduino I/O performance

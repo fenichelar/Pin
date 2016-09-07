@@ -1,5 +1,5 @@
 /**
-  @file Pin-Analog.ino
+  @example Pin-Analog.ino
   @author Alec Fenichel
   @brief Pin analog example
   @details Read analog pins

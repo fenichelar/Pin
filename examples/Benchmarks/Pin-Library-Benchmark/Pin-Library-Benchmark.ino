@@ -1,5 +1,5 @@
 /**
-  @file Pin-Library-Benchmark.ino
+  @example Pin-Library-Benchmark.ino
   @author Alec Fenichel
   @brief Pin Library benchmark
   @details Test Pin Library I/O performance

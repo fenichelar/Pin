@@ -1,5 +1,5 @@
 /**
-  @file Pin-Group.ino
+  @example Pin-Group.ino
   @author Alec Fenichel
   @brief Pin group example
   @details Simultaneously toggle a Pin Groups output

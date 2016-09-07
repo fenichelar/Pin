@@ -1,5 +1,5 @@
 /**
-  @file Pin-Custom.ino
+  @example Pin-Custom.ino
   @author Alec Fenichel
   @brief Pin custom example
   @details Quickly toggling a custom Pins output

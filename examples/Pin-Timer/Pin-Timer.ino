@@ -1,5 +1,5 @@
 /**
-  @file Pin-Timer.ino
+  @example Pin-Timer.ino
   @author Alec Fenichel
   @brief Pin timer example
   @details Use can RC circuit with a digital Pin to get analog values

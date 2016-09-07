@@ -1,5 +1,5 @@
 /**
-  @file Pin-Array.ino
+  @example Pin-Array.ino
   @author Alec Fenichel
   @brief Pin array example
   @details Quickly switch an array of Pins output between low and high

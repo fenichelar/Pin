@@ -1,5 +1,5 @@
 /**
-  @file Pin-Toggle.ino
+  @example Pin-Toggle.ino
   @author Alec Fenichel
   @brief Pin toggle example
   @details Quickly toggling a Pins output
