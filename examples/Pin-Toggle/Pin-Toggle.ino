@@ -1,8 +1,8 @@
 /**
   @example Pin-Toggle.ino
+  @file Pin-Toggle.ino
   @author Alec Fenichel
-  @brief Pin toggle example
-  @details Quickly toggling a Pins output
+  @brief Quickly toggling a Pins output
 */
 
 #include <Pin.h>  // Include Pin Library

@@ -1,8 +1,8 @@
 /**
   @example Pin-Custom.ino
+  @file Pin-Custom.ino
   @author Alec Fenichel
-  @brief Pin custom example
-  @details Quickly toggling a custom Pins output
+  @brief Quickly toggling a custom Pins output
 */
 
 #include <Pin.h>  // Include Pin Library

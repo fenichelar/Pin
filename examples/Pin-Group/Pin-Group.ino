@@ -1,8 +1,8 @@
 /**
   @example Pin-Group.ino
+  @file Pin-Group.ino
   @author Alec Fenichel
-  @brief Pin group example
-  @details Simultaneously toggle a Pin Groups output
+  @brief Simultaneously toggle a Pin Groups output
 */
 
 #include <Pin.h>  // Include Pin Library

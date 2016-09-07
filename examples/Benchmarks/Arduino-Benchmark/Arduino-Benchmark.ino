@@ -1,8 +1,8 @@
 /**
   @example Arduino-Benchmark.ino
+  @file Arduino-Benchmark.ino
   @author Alec Fenichel
-  @brief Arduino benchmark
-  @details Test Arduino I/O performance
+  @brief Test Arduino I/O performance
 */
 
 #define PIN 13  // Define PIN for digital pin labelled 13 on any of the supported boards

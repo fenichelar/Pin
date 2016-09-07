@@ -1,8 +1,8 @@
 /**
   @example Pin-Timer.ino
+  @file Pin-Timer.ino
   @author Alec Fenichel
-  @brief Pin timer example
-  @details Use can RC circuit with a digital Pin to get analog values
+  @brief Use an RC circuit with a digital Pin to get analog values
 */
 
 #include <Pin.h>  // Include Pin Library

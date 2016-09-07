@@ -1,8 +1,7 @@
 /**
 	@file Pin.h
 	@author Alec Fenichel
-	@brief Arduino Pin library
-	@details Arduino library for fast and simultaneous operations to Arduino I/O pins
+	@brief Class for fast operations on Arduino I/O pins
  */
 
 
@@ -33,7 +32,7 @@
 
 
 /**
-	Class for fast access to Arduino I/O pins
+	Class for fast operations on Arduino I/O pins
 
 	@author Alec Fenichel
  */
