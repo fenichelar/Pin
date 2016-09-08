@@ -1,7 +1,7 @@
 /**
 	@file Pin.h
 	@author Alec Fenichel
-	@brief For fast operations on Arduino I/O pins
+	@brief Fast operations on Arduino I/O pins
  */
 
 
