@@ -1,7 +1,7 @@
 /**
 	@file PinGroup.h
 	@author Alec Fenichel
-	@brief Class for simultaneous operations on Arduino I/O pins
+	@brief For simultaneous operations on Arduino I/O pins
  */
 
 
