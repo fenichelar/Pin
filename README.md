@@ -150,11 +150,11 @@ Simultaneously set mode for each Pin in PinGroup to OUTPUT
 ~~~~~~~~~~~~~{.cpp}
 myPinGroup.setOutput();
 ~~~~~~~~~~~~~
-Simultaneously set state each Pin in PinGroup to HIGH
+Simultaneously set state for each Pin in PinGroup to HIGH
 ~~~~~~~~~~~~~{.cpp}
 myPinGroup.setHigh();
 ~~~~~~~~~~~~~
-Simultaneously set state each Pin in PinGroup to LOW
+Simultaneously set state for each Pin in PinGroup to LOW
 ~~~~~~~~~~~~~{.cpp}
 myPinGroup.setLow();
 ~~~~~~~~~~~~~
