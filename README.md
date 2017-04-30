@@ -41,12 +41,14 @@ Simple benchmark programs were created to compare this library to both the built
 
 <a name="usage"></a>
 ## Usage
+
 <a name="install"></a>
 ### Install
 Install from the Arduino Library Manager or download the latest release [here](https://github.com/fenichelar/Pin/releases/latest).
 
 <a name="import-pin-library"></a>
 ### Import Pin Library
+Without support for simultaneous operations
 ~~~~~~~~~~~~~{.cpp}
 #include <Pin.h>
 ~~~~~~~~~~~~~
