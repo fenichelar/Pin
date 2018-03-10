@@ -458,7 +458,7 @@ class Pin {
 
 				// Count time before Pin becomes high
 				"loop%=: \n\t"  // Label for looping
-					//"ld __tmp_reg__,%a[_PIN] \n\t"  // Load the PIN register into r0 (__tmp_reg__)
+					"ld __tmp_reg__,%a[_PIN] \n\t"  // Load the PIN register into r0 (__tmp_reg__)
 					"and __tmp_reg__, %[_offset] \n\t"  // Apply the bit mask (offset) to r0 (__tmp_reg__)
 					"brne end%= \n\t"  // End the loop if r0 (__tmp_reg__) is not equal to zero by branching to label 'end'
 					"dec %[count] \n\t"  // Decrement the value of 'count' by one
