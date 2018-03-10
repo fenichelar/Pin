@@ -39,6 +39,19 @@
 class Pin {
 	public:
 		// ################################# Constructors #################################
+		
+		/**
+			Default constructor
+		 */
+		Pin() {
+			_number = 0;
+			_offset = digitalPinToBitMask(_number);
+			_ioffset = ~_offset;
+			_timer = digitalPinToTimer(_number);
+			_PIN = portInputRegister(digitalPinToPort(_number));
+			_PORT = portOutputRegister(digitalPinToPort(_number));
+			_DDR = portModeRegister(digitalPinToPort(_number));
+		}
 
 		/**
 			Arduino supported board constructor
