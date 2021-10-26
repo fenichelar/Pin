@@ -1,8 +1,8 @@
 /**
-  @example Pin-Library-Benchmark.ino
+  Test Pin Library I/O performance
+
   @file Pin-Library-Benchmark.ino
   @author Alec Fenichel
-  @brief Test Pin Library I/O performance
 */
 
 #include <Pin.h>  // Include Pin Library

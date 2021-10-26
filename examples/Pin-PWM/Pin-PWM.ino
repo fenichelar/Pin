@@ -1,8 +1,8 @@
 /**
-  @example Pin-PWM.ino
+  Use PWM
+
   @file Pin-PWM.ino
   @author Alec Fenichel
-  @brief Use PWM
 */
 
 #include <Pin.h>  // Include Pin Library

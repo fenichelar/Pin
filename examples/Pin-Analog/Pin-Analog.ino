@@ -1,8 +1,8 @@
 /**
-  @example Pin-Analog.ino
+  Read analog pins
+
   @file Pin-Analog.ino
   @author Alec Fenichel
-  @brief Read analog pins
 */
 
 #include <Pin.h>  // Include Pin Library

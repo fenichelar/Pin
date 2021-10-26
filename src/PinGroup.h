@@ -1,14 +1,14 @@
 /**
-  @file PinGroup.h
-  @author Alec Fenichel
-  @brief Simultaneous operations on Arduino I/O pins
- */
+  Simultaneous operations on Arduino I/O pins
 
+  @file PinGroup.h
+  @example Pin-Group.ino
+  @author Alec Fenichel
+ */
 
 #include "Pin.h"
 
 #pragma once
-
 
 /**
   Class for simultaneous operations on Arduino I/O pins
@@ -17,7 +17,11 @@
  */
 class PinGroup {
   public:
-    // ################################# Constructors #################################
+    /**
+      Default constructor
+
+      @param pins Pin array
+     */
     template<size_t N>
     PinGroup(Pin (&pins)[N]) {
       _offset = pins[0].getOffset();
@@ -36,8 +40,6 @@ class PinGroup {
       }
       _ioffset = ~_offset;
     }
-
-    // ################################# Operators #################################
 
     /**
       Compare the value of the pin
@@ -92,8 +94,6 @@ class PinGroup {
 
       return *this;
     }
-
-    // ################################# Getters #################################
 
     /**
       Get the pin numbers
@@ -206,11 +206,6 @@ class PinGroup {
       return _valid;
     }
 
-
-    // ################################# Setters #################################
-
-    // #################### Generic ####################
-
     /**
       Set the pin mode and pin state
 
@@ -265,8 +260,6 @@ class PinGroup {
       SREG = oldSREG;
     }
 
-    // #################### Input ####################
-
     /**
       Set the pin mode to input
      */
@@ -318,8 +311,6 @@ class PinGroup {
       PORT_LOW;
       SREG = oldSREG;
     }
-
-    // #################### Output ####################
 
     /**
       Set the pin mode to output
@@ -373,11 +364,6 @@ class PinGroup {
       SREG = oldSREG;
     }
 
-
-    // ################################# Utilities #################################
-
-    // #################### Toggle ####################
-
     /**
       Toggle the pin mode (OUTPUT -> INPUT, INPUT -> OUTPUT)
      */
@@ -399,7 +385,6 @@ class PinGroup {
     }
 
   private:
-    // Variables
     uint8_t _numbers[8];
     uint8_t _offset;
     uint8_t _ioffset;

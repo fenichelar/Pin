@@ -1,8 +1,8 @@
 /**
-  @example Pin-Array.ino
+  Quickly switch an array of Pins output between low and high
+
   @file Pin-Array.ino
   @author Alec Fenichel
-  @brief Quickly switch an array of Pins output between low and high
 */
 
 #include <Pin.h>  // Include Pin Library

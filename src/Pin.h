@@ -1,17 +1,19 @@
 /**
-  @file Pin.h
-  @author Alec Fenichel
-  @brief Fast operations on Arduino I/O pins
- */
+  Fast operations on Arduino I/O pins
 
+  @file Pin.h
+  @example Pin-Analog.ino
+  @example Pin-Array.ino
+  @example Pin-Custom.ino
+  @example Pin-PWM.ino
+  @example Pin-Timer.ino
+  @example Pin-Toggle.ino
+  @author Alec Fenichel
+ */
 
 #include "Arduino.h"
 
-
 #pragma once
-
-
-// ################################# Defines #################################
 
 #define DDR_HIGH (*_DDR |= _offset)  ///< Set the DDR register to HIGH for the pin
 #define DDR_TOGGLE (*_DDR ^= _offset)  ///< Set the DDR register to the inverse for the pin
@@ -21,15 +23,14 @@
 #define PORT_TOGGLE (*_PORT ^= _offset)  ///< Set the PORT register to the inverse for the pin
 #define PORT_LOW (*_PORT &= _ioffset)  ///< Set the PORT register to LOW for the pin
 
-#define DDR_ON (*_DDR & _offset)  ///< Get the DDR register for the pin (HIGH, LOW) with other pins forced to 0
-#define DDR_OFF (*_DDR | _ioffset)  ///< Get the DDR register for the pin (HIGH, LOW) with other pins forced to 1
+#define DDR_ON (*_DDR & _offset)  ///< Get the DDR register for the pin (HIGH, LOW)
+#define DDR_OFF (*_DDR | _ioffset)  ///< Get the DDR register for the pin (HIGH, LOW)
 
-#define PORT_ON (*_PORT & _offset)  ///< Get the PORT register for the pin (HIGH, LOW) with other pins forced to 0
-#define PORT_OFF (*_PORT | _ioffset)  ///< Get the PORT register for the pin (HIGH, LOW) with other pins forced to 1
+#define PORT_ON (*_PORT & _offset)  ///< Get the PORT register for the pin (HIGH, LOW)
+#define PORT_OFF (*_PORT | _ioffset)  ///< Get the PORT register for the pin (HIGH, LOW)
 
-#define PIN_ON (*_PIN & _offset)  ///< Get the PIN register for the pin (HIGH, LOW) with other pins forced to 0
-#define PIN_OFF (*_PIN | _ioffset)  ///< Get the PIN register for the pin (HIGH, LOW) with other pins forced to 1
-
+#define PIN_ON (*_PIN & _offset)  ///< Get the PIN register for the pin (HIGH, LOW)
+#define PIN_OFF (*_PIN | _ioffset)  ///< Get the PIN register for the pin (HIGH, LOW)
 
 /**
   Class for fast operations on Arduino I/O pins
@@ -38,8 +39,6 @@
  */
 class Pin {
   public:
-    // ################################# Constructors #################################
-    
     /**
       Default constructor
      */
@@ -90,9 +89,6 @@ class Pin {
       _DDR = DDR;
     }
 
-
-    // ################################# Operators #################################
-
     /**
       Get the value of the pin from the PIN register
 
@@ -119,9 +115,6 @@ class Pin {
 
       return *this;
     }
-
-
-    // ################################# Getters #################################
 
     /**
       Get the pin number
@@ -234,11 +227,6 @@ class Pin {
       return analogRead(_number);
     }
 
-
-    // ################################# Setters #################################
-
-    // #################### Generic ####################
-
     /**
       Set the pin mode and pin state
 
@@ -293,8 +281,6 @@ class Pin {
       SREG = oldSREG;
     }
 
-    // #################### Input ####################
-
     /**
       Set the pin mode to input
      */
@@ -346,8 +332,6 @@ class Pin {
       PORT_LOW;
       SREG = oldSREG;
     }
-
-    // #################### Output ####################
 
     /**
       Set the pin mode to output
@@ -410,11 +394,6 @@ class Pin {
       analogWrite(_number,value);
     }
 
-
-    // ################################# Utilities #################################
-
-    // #################### Toggle ####################
-
     /**
       Toggle the pin mode (OUTPUT -> INPUT, INPUT -> OUTPUT)
      */
@@ -435,9 +414,6 @@ class Pin {
       SREG = oldSREG;
     }
 
-
-    // #################### RC Timer ####################
-
     /**
       Set the pin mode to input and decrement a counter until the pin goes HIGH or the counter reaches 0 then set the pin mode to output and return the counter value
 
@@ -446,7 +422,6 @@ class Pin {
       @return the value remaining on the counter when the pin state went to HIGH or 0 if the counter reached 0
      */
     volatile unsigned int rcTimer(volatile unsigned int count) {
-      // ######## C ########
       /*
       pin.setInput();
       for (; count > 0; count--) {
@@ -457,7 +432,6 @@ class Pin {
       }
       */
 
-      // ######## Assembly ########
       uint8_t status;
       asm volatile (
         // Save interupt status and disable interupts
@@ -504,7 +478,6 @@ class Pin {
     }
 
   private:
-    // Variables
     uint8_t _number;
     uint8_t _offset;
     uint8_t _ioffset;

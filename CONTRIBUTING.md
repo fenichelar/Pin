@@ -1,5 +1,5 @@
-Contributing
-===
+# Contributing
+
 ## Style
 - **Indent**: 2 spaces
 - **Spacing**: See existing pages
