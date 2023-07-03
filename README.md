@@ -1,6 +1,6 @@
 Arduino Pin Library
 ===
-An easy to use Arduino library for fast and simultaneous operations on Arduino I/O pins. Supports Arduino AVR boards natively and custom boards by manually defining register addresses. Complete documentation can be found [here](https://pin.fenichelar.com). Source code can be found [here](https://github.com/fenichelar/Pin).
+An easy to use Arduino library for fast and simultaneous operations on Arduino I/O pins. Supports Arduino AVR boards natively and custom boards by manually defining register addresses. Complete documentation can be found [here](https://fenichelar.github.io/Pin/). Source code can be found [here](https://github.com/fenichelar/Pin).
 
 * [Background](#background)
 * [Advantages](#advantages)
