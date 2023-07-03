@@ -33,15 +33,15 @@ jobs:
         run: sudo apt-get install -y doxygen graphviz
 
       - name: Run Doxygen
-        run: doxygen extra/documentation/doxygen.config
+        run: doxygen extras/documentation/doxygen.config
 
       - name: Create .nojekyll
-        run: touch extra/documentation/html/.nojekyll
+        run: touch extras/documentation/html/.nojekyll
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: extra/documentation/html
+          path: extras/documentation/html
 
   deploy:
     environment:
