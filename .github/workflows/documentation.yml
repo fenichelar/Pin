@@ -30,7 +30,11 @@ jobs:
         uses: actions/configure-pages@v3
 
       - name: Install Doxygen
-        run: sudo apt-get install -y doxygen graphviz
+        run: |
+          version="1.9.7"
+          wget https://doxygen.nl/files/doxygen-$version.linux.bin.tar.gz -P /tmp/
+          tar -xf /tmp/doxygen-$version.linux.bin.tar.gz -C /tmp/
+          cp /tmp/doxygen-$version/bin/doxygen /bin/doxygen
 
       - name: Run Doxygen
         run: doxygen extras/documentation/doxygen.config
